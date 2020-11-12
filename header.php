@@ -22,7 +22,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="index.php">Company Name</a>
+						<a class="navbar-brand" href="index.php">PawPals</a>
 					</div>
 			
 					<!-- Collect the nav links, forms, and other content for toggling -->

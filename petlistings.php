@@ -1,7 +1,7 @@
 <?php 
 include "header.php"; 
 ?>
-<article class="main-container">
+
 	<!--page header-->
 	<div class="container-fluid text-center">
 		<h1>Pet Listings Page</h1>
@@ -16,16 +16,16 @@ include "header.php";
 			<textarea type="text" class="form-control listing-text-input" placeholder="Listing Description" rows="5"></textarea>
 		</div>
 		<div class="form-inline text-center">
+		</br>
 			<button type="button" class="submit-listing-btn">Post</button>
 		</div>
 	</div>
 	
 	<!--listings-->
-	<!--pictures need to have links to the profile page-->
-	<div id="listings-container" class="container text-center">
-		
-		<a class="profile-link" href="profile.html">
-			<div class="row">
+	<!--pictures need to have links to the respective profile page-->
+	<div class="container text-center">
+		<a class="profile-link" href="petprofile.php">
+			<div class="row listing-row">
 				<div class="col-md-3">
 					<div class="profile-picture">
 						<img class="img-rounded" src="images/profile-pic.jpg" height="120px">
@@ -43,8 +43,8 @@ include "header.php";
 			</div>
 		</a>
 		
-		<a class="profile-link" href="profile.html">
-			<div class="row">
+		<a class="profile-link" href="petprofile.php">
+			<div class="row listing-row">
 				<div class="col-md-3">
 					<div class="profile-picture">
 						<img class="img-rounded" src="images/profile-pic.jpg" height="120px">
@@ -59,8 +59,8 @@ include "header.php";
 			</div>
 		</a>
 		
-		<a class="profile-link" href="profile.html">
-			<div class="row">
+		<a class="profile-link" href="petprofile.php">
+			<div class="row listing-row">
 				<div class="col-md-3">
 					<div class="profile-picture">
 						<img class="img-rounded" src="images/profile-pic.jpg" height="120px">
@@ -75,10 +75,9 @@ include "header.php";
 				</div>
 			</div>
 		</a>
-		
+	
 	</div>
 </article>	
-
 <?php 
 include "footer.php"; 
 ?>

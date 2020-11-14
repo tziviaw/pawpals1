@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<article class="main-container">
 	<header>
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
@@ -28,7 +29,7 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav button">
-							<li><a href="sitterlistings.php" role="button"><p>Sitters</p></a></li>
+							<li><a href="sitterlistings.php" role="button">Sitters</a></li>
 							<li><a href="petlistings.php" role="button">Pets</a></li>
 							<li><a href="sitterprofile.php" role="button">View Sitter Profile</a></li>
 							<li><a href="petprofile.php" role="button">View Pet Profile</a></li>
@@ -39,7 +40,7 @@
 							<li><a href="registerlogin.php" role="button"><span id="register-login-ico" class="glyphicon glyphicon-log-in"></span>Register/Login</a></li>
 							</li>
 					</ul>
-					</div><!-- /.navbar-collapse -->
+				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>
 	</header>

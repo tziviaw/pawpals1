@@ -2,7 +2,7 @@
 include "header.php"; 
 ?>
 
-<article class="main-container">
+
 	<div class="container">
 		<article class="row">
 			<section class="col-sm-5">

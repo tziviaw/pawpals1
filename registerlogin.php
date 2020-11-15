@@ -2,7 +2,6 @@
 include "header.php"; 
 ?>
 
-<article class="main-container">
 <div class="container">				
 			<div class="col-md-6">
 				<h3 class="dark-grey">Register</h3>
@@ -67,12 +66,3 @@ include "header.php";
 <?php 
 include "footer.php"; 
 ?>
-
-
-
-
-
-
-
-
-

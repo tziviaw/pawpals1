@@ -7,20 +7,6 @@ include "header.php";
 		<h1>Sitter Listings Page</h1>
 	</div>
 	
-	<!--create listing-->
-	<div class="text-center">
-	<label>Create Listing:</label>
-	</div>
-	<div class="container-fluid">
-		<div class="form-inline text-center">
-			<textarea type="text" class="form-control listing-text-input" placeholder="Listing Description" rows="5"></textarea>
-		</div>
-		<div class="form-inline text-center">
-		</br>
-			<button type="button" class="submit-listing-btn">Post</button>
-		</div>
-	</div>
-	
 	<!--listings-->
 	<!--pictures need to have links to the respective profile page-->
 	<div class="container text-center">

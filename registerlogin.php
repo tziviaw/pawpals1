@@ -53,7 +53,6 @@ include "header.php";
 						</div>
 						<div class="form-group">
 							<label for="exampleFormControlFile1">Profile Type</label><br> <input type="radio" name="choice-profile" id="choice-profile-sitter"> <label for="choice-profile-sitter">Sitter</label> <input type="radio" name="choice-profile" id="choice-profile-pet"> <label for="choice-profile-pet">Pet</label> <input type="radio" name="choice-profile" id="choice-profile-both"> <label for="choice-profile-pet">Both</label>
-							<div class="reveal-if-active">
 								<div class="form-group">
 									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" class="form-control-file" id="exampleFormControlFile1">
 								</div>
@@ -75,7 +74,6 @@ include "header.php";
 										<input type="checkbox" id="sunday" name="sunday" value="Sunday"> <label for="sunday">Sunday</label><br>
 									</form>
 								</div>
-							</div>
 							
 							<div class="text-center">
 								<button type="submit" class="btn btn-block mybtn btn-primary">REGISTER</button>

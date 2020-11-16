@@ -1,4 +1,52 @@
 <?php 
+
+include "db.php";
+
+$firstname = $lastname = $email = $username = $password = "";
+$firstnameErr = $lastnameErr = $emailErr = $usernameErr = $passwordErr = "";
+$finalstatus = "";
+
+if(isset($_POST['btn-register'])){
+
+	$firstname = ucfirst(trim($_POST['firstname']));
+
+	$lastname =  ucfirst(trim($_POST['lastname']));
+
+	$email = strtolower(trim($_POST['email']));
+
+	$sqlEmail = "select * from users where email = '$email'";
+	$resultEmail = $con->query($sqlEmail);
+	if($resultEmail->num_rows > 0)
+		$emailErr = "Email exists, please choose another one or try logging in";
+
+	$username = strtolower(trim($_POST['username']));
+
+	$sqlUsername = "select * from users where username = '$username'";
+	$result = $con->query($sqlUsername);
+	if($result->num_rows > 0) 
+		$usernameErr = "Username exists, please choose another one or try logging in";
+
+	$password = trim($_POST['password']);
+		$password = md5($password);
+
+
+
+	if ($firstnameErr == "" && $lastnameErr == "" && $emailErr == "" && $usernameErr == "" && $passwordErr == "" ) {
+		
+		$sql = "insert into users(firstname, lastname, email, username, password) 	values ('$firstname', '$lastname', '$email', '$username', '$password')";
+
+		if($con->query($sql) === true) {
+
+			$finalstatus = "New user registered succesfully";
+			$firstname=$lastname=$email=$username=$password = "";
+		}
+		else{
+			$finalstatus = $con->error;
+		}
+
+	}
+
+}
 include "header.php"; 
 ?>
 		<div class="container">
@@ -9,9 +57,10 @@ include "header.php";
 					<div class="logo">
 						<div class="text-center">
 							<h1>Login</h1>
+							<p> <?php echo $finalstatus ?>
 						</div>
 					</div>
-					<form action="" method="post" name="login" id="login">
+					<form  method="post" action="registerlogin.php" name="login" id="login">
 						<div class="form-group">
 							<label for="exampleInputEmail1">Email address</label> <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" style="text-decoration: none">
 						</div>
@@ -19,7 +68,7 @@ include "header.php";
 							<label for="exampleInputEmail1">Password</label> <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Password" style="text-decoration: none">
 						</div>
 						<div class="text-center">
-							<button type="submit" class="btn btn-block mybtn btn-primary">LOGIN</button>
+							<input type="submit" name = "btn-login" class="btn btn-block mybtn btn-primary">LOGIN</button>
 						</div>
 						<div class="form-group">
 							<p class="text-center">Don't have an account? <a href="#" id="signup">Register here</a></p>
@@ -35,26 +84,27 @@ include "header.php";
 							<h1>Register</h1>
 						</div>
 					</div>
-					<form action="#" name="registration" id="registration">
+					<form method="post" action="registerlogin.php" enctype = "multipart/form-data" name="registration" id="registration">
 						<div class="form-group">
-							<label for="exampleInputEmail1">First Name</label> <input type="text" name="firstname" class="form-control" id="firstname" placeholder="First Name" aria-describedby="emailHelp">
+							<label for="exampleInputEmail1">First Name</label> <input type="text" name="firstname" class="form-control" value = "<?php echo $firstname; ?>" id="firstname" placeholder="First Name" aria-describedby="emailHelp">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Last Name</label> <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Last Name" aria-describedby="emailHelp">
+							<label for="exampleInputEmail1">Last Name</label> <input type="text" name="lastname" class="form-control" value = "<?php echo $lastname; ?>" id="lastname" placeholder="Last Name" aria-describedby="emailHelp">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Email address</label> <input type="email" name="email" class="form-control" id="email" placeholder="Email" aria-describedby="emailHelp" style="text-decoration: none">
+							<label for="exampleInputEmail1">Email address</label> <span class = "error"> <?php echo $emailErr; ?> </span> <input type="email" name="email" class="form-control" value = "<?php echo $email; ?>" id="email" placeholder="Email" aria-describedby="emailHelp" style="text-decoration: none">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Username</label> <input type="text" name="username" class="form-control" id="username" placeholder="Username" aria-describedby="emailHelp" style="text-decoration: none">
+							<label for="exampleInputEmail1">Username</label> <span class = "error"> <?php echo $usernameErr; ?> </span> <input type="text" name="username" class="form-control" value = "<?php echo $username; ?>" id="username" placeholder="Username" aria-describedby="emailHelp" style="text-decoration: none">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Password</label> <input type="password" name="password" class="form-control" id="password" placeholder="Password" aria-describedby="emailHelp" style="text-decoration: none">
+							<label for="exampleInputEmail1">Password</label>  <input type="password" name="password" class="form-control" value = "<?php echo $password; ?>" id="password" placeholder="Password" aria-describedby="emailHelp" style="text-decoration: none">
 						</div>
 						<div class="form-group">
 							<label for="exampleFormControlFile1">Profile Type</label><br> <input type="radio" name="choice-profile" id="choice-profile-sitter"> <label for="choice-profile-sitter">Sitter</label> <input type="radio" name="choice-profile" id="choice-profile-pet"> <label for="choice-profile-pet">Pet</label> <input type="radio" name="choice-profile" id="choice-profile-both"> <label for="choice-profile-pet">Both</label>
+							<div class="reveal-if-active">
 								<div class="form-group">
-									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" class="form-control-file" id="exampleFormControlFile1">
+									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" name = "profileimage" class="form-control-file" id="exampleFormControlFile1">
 								</div>
 								<div class="form-group">
 									<label>Zipcode</label> <input type="text" class="form-control" placeholder="12345">
@@ -74,9 +124,10 @@ include "header.php";
 										<input type="checkbox" id="sunday" name="sunday" value="Sunday"> <label for="sunday">Sunday</label><br>
 									</form>
 								</div>
+							</div>
 							
 							<div class="text-center">
-								<button type="submit" class="btn btn-block mybtn btn-primary">REGISTER</button>
+								<input type="submit" name = "btn-register" value="REGISTER" class="btn btn-block mybtn btn-primary />
 							</div>
 							
 							<div>

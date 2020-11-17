@@ -7,5 +7,6 @@
 			</div>
 		</footer>
 		<script src="js/bootstrap.js"></script>
+		<script src="js/registerlogin.js"></script>
 	</body>
 </html>

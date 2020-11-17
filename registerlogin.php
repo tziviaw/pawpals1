@@ -27,7 +27,7 @@ if(isset($_POST['btn-login'])){
 
 		if($result->num_rows > 0){
 			$_SESSION['email'] = $email;
-			header("Location: sitterprofile.php");
+			header("Location: profile.php");
 		}
 		else{
 			$loginErr = "Error logging in, please try again";
@@ -35,13 +35,13 @@ if(isset($_POST['btn-login'])){
 	}
 	}
 
-	
-$firstname = $lastname = $email = $username = $password = "";
+
+$firstname = $lastname = $email = $username = $password = $zipcode = $contact = "";
 $firstnameErr = $lastnameErr = $emailErr = $usernameErr = $passwordErr = "";
 $finalstatus = "";
 
 if(isset($_POST['btn-register'])){
-	
+
 	$firstname = ucfirst(trim($_POST['firstname']));
 
 	$lastname =  ucfirst(trim($_POST['lastname']));
@@ -63,16 +63,14 @@ if(isset($_POST['btn-register'])){
 	$password = trim($_POST['password']);
 		$password = md5($password);
 
-	if(getimagesize($_FILES['profileimage']['tmp_name']) !== false){
-		$imgContent = addslashes(file_get_contents($_FILES['profileimage']['tmp_name']));
-	} 
-	else
-		$imgErr = "upload an image";
+	$zipcode = $_POST['zipcode'];
+
+	$contact = $_POST['contact'];
 
 
 	if ($firstnameErr == "" && $lastnameErr == "" && $emailErr == "" && $usernameErr == "" && $passwordErr == "" ) {
 		
-		$sql = "insert into users(firstname, lastname, email, username, password, picture) 	values ('$firstname', '$lastname', '$email', '$username', '$password', '$imgContent')";
+		$sql = "insert into users(firstname, lastname, email, username, password, zipcode, contact) 	values ('$firstname', '$lastname', '$email', '$username', '$password', '$zipcode', '$contact')";
 
 		if($con->query($sql) === true) {
 
@@ -146,10 +144,10 @@ include "header.php";
 									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" name = "profileimage" class="form-control-file" id="exampleFormControlFile1">
 								</div>
 								<div class="form-group">
-									<label>Zipcode</label> <input type="text" class="form-control" placeholder="12345">
+									<label>Zipcode</label> <input type="text" name="zipcode" class="form-control" placeholder="12345">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputEmail1">Contact Number</label> <input type="contactnumber" name="" class="form-control" placeholder="123-456-7890">
+									<label for="exampleInputEmail1">Contact Number</label> <input type="contactnumber" name="contact" class="form-control" placeholder="123-456-7890">
 								</div>
 								<div class="form-group">
 									<label for="exampleInputEmail1">Availability</label><br>

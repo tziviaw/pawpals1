@@ -110,7 +110,7 @@ textarea {
 
 #email {
 	text-decoration: underline;
-	color: white;
+	color: black;
 }
 
 #email:hover {
@@ -176,8 +176,9 @@ table, img {
 	display: none;
 	position: center;
 	width: 50%;
-	border: 3px solid; 
-	border-color: black;
+	border: 1px solid; 
+	border-color: gray;
+	border-radius: 10px;
 	z-index: 1;
 }
 

@@ -30,6 +30,7 @@ $listingob = new sitterlisting;
 			$listing_availableto = $row['sp_availableto'];
 			$listing_days = $row['sp_days'];
 			$listing_contact = $row['contact'];
+			$listing_zipcode = $row['zipcode'];
 			$listing_id = $row['sp_id'];
 
 	?>
@@ -57,6 +58,7 @@ $listingob = new sitterlisting;
 						<p><b>Available From: </b> <?php echo $listing_availablefrom?></p>
 						<p><b>Available To: </b> <?php echo $listing_availableto?></p>
 						<p><b>Days Available: </b> <?php $user->getAvailability($listing_days, $con);?></p>
+						<p><b>Zipcode Location: </b> <?php echo $listing_zipcode?></p>
 						<p><b>Contact: </b> <?php echo $listing_contact?></p>
 
 					</div>

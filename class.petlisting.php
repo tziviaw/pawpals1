@@ -1,7 +1,7 @@
 <?php
 class petlisting{
     static public function getListings($con){
-        $sql = "select pl_id, pp_id, pp_img as 'img', petname, pettype, breed, size, pl_description as 'desc', contact,
+        $sql = "select pl_id, pp_id, pp_img as 'img', petname, pettype, breed, size, zipcode, pl_description as 'desc', contact,
         pl_neededfrom, pl_neededto
         from petlistings, petprofiles, users 
         where pp_id = pl_pp_id 

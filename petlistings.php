@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$username = 'user2';
+$username = 'user1';
 
 // if(isset($SESSION['username'])){}
 
@@ -80,6 +80,7 @@ $listingob = new petlisting;
 			$listing_size = $row['size'];
 			$listing_description = $row['desc'];
 			$listing_contact = $row['contact'];
+			$listing_zipcode = $row['zipcode'];
 			$listing_neededfrom = $row['pl_neededfrom'];
 			$listing_neededto = $row['pl_neededto'];
 			$listings_id = $row['pl_id'];
@@ -98,7 +99,7 @@ $listingob = new petlisting;
 							echo '<a href="petprofile.php?pet=<?php echo $listing_petid?>"><img src="images/profile-pic.jpg" alt="profile picture" class="img-rounded" height="120px"></a>';
 						}
 						else{
-							echo '<a href="petprofile.php?pet=<?php echo $listing_petid?>"><img src="data:image/jpeg;base64,'.base64_encode($listing_img).'" class="listingimage" 
+							echo'<a href="petprofile.php?pet=<?php echo $listing_petid?>"><img src="data:image/jpeg;base64,'.base64_encode($listing_img).'" class="listingimage" 
 							alt="profile picture height="120px" style="width: 120px; height: 120px;" /></a>';
 						}
 						?>
@@ -116,6 +117,7 @@ $listingob = new petlisting;
 					</br>
 						<p><b>Needed From:	</b> <?php echo $listing_neededfrom ?></p>
 						<p><b>Needed To: 	</b>	<?php echo $listing_neededto?></p>
+						<p><b>Zipcode Location: </b> <?php echo $listing_zipcode?></p>
 						<p><b>Contact: 	</b> <?php echo $listing_contact?></p>
 					</div>
 				</div>

@@ -11,6 +11,20 @@
             };
             return $pets;
         }
+
+        static function getAvailability($binarydays, $con){
+            $arr = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+            
+            $search = $binarydays;
+            $search_arr = str_split($search);
+            $result = array();
+            foreach($search_arr as $key => $value){
+                if($value == 1){
+                    $result[] = $arr[$key];
+                }
+            }
+            echo implode(", ", $result);
+        }
     }
 
 ?>

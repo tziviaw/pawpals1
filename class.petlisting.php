@@ -1,13 +1,14 @@
 <?php
 class petlisting{
-    static public function getListingDetails($petlistnum, $con){
-        $sql = "select pl_id, pp_id, pp_img as img, petname, pettype, breed, size, pl_description as desc, 
-        pl_neededfrom as neededfrom, pl_neededto as neededto
-        from petlistings, petprofiles 
-        where pl_id = 1 and pp_id = pl_id;";
+    static public function getListings($con){
+        $sql = "select pl_id, pp_id, pp_img as 'img', petname, pettype, breed, size, pl_description as 'desc', contact,
+        pl_neededfrom, pl_neededto
+        from petlistings, petprofiles, users 
+        where pp_id = pl_pp_id 
+        and username = pp_username
+        order by pl_datecreated desc;";
 
         $result = $con->query($sql);
-        $row = $result->fetch_assoc();
         return $result;
     }
 
@@ -17,6 +18,19 @@ class petlisting{
                 VALUES ('$username', $petid, '$description', '$dateneededfrom', '$dateneededto')";
                
         echo $sql;
+        $result = $con->query($sql);
+        return $result;
+    }
+
+    static function filterListing($search, $con){
+        $sql = "select pl_id, pp_id, pp_img as 'img', petname, pettype, breed, size, pl_description as 'desc', contact,
+        pl_neededfrom, pl_neededto
+        from petlistings, petprofiles, users 
+        where (pp_id = pl_pp_id 
+        and username = pp_username)
+        and (pettype like '$search' or breed like '$search' or size like '$search' or pl_description like '$search')
+        order by pl_datecreated desc;";
+
         $result = $con->query($sql);
         return $result;
     }

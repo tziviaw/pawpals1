@@ -1,11 +1,12 @@
 <?php
+session_start();
 
 require_once('db.php');
 require_once('class.petlisting.php');
 
 print_r($_POST);
 
-$username = 'user1';
+$username = 'user2';
 $pp_id = $_POST['pp_id'];
 $description = $_POST['description'];
 $neededfrom = $_POST['neededfrom'];

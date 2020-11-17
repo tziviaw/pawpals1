@@ -89,9 +89,9 @@ textarea {
 	margin-right: 3em;
 }
 
-.listing-row:hover {
+/* .listing-row:hover {
 	background-color: #C0C0C0;
-}
+} */
 
 .col-md-3, .col-md-6 {
 	padding: 20px;
@@ -120,6 +120,16 @@ table, img {
 	height: auto;
 	/* height: 760px; */
 	margin-left: 15px;
+}
+
+/* for the pet listings popup form */
+.form-popup {
+	display: none;
+	position: center;
+	width: 50%;
+	border: 3px solid; 
+	border-color: black;
+	z-index: 1;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */

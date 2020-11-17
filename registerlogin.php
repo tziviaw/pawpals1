@@ -27,7 +27,7 @@ if(isset($_POST['btn-login'])){
 
 		if($result->num_rows > 0){
 			$_SESSION['email'] = $email;
-			header("Location: profile.php");
+			header("Location: sitterprofile.php");
 		}
 		else{
 			$loginErr = "Error logging in, please try again";
@@ -35,13 +35,13 @@ if(isset($_POST['btn-login'])){
 	}
 	}
 
-
+	
 $firstname = $lastname = $email = $username = $password = "";
 $firstnameErr = $lastnameErr = $emailErr = $usernameErr = $passwordErr = "";
 $finalstatus = "";
 
 if(isset($_POST['btn-register'])){
-
+	
 	$firstname = ucfirst(trim($_POST['firstname']));
 
 	$lastname =  ucfirst(trim($_POST['lastname']));
@@ -63,11 +63,16 @@ if(isset($_POST['btn-register'])){
 	$password = trim($_POST['password']);
 		$password = md5($password);
 
+	if(getimagesize($_FILES['profileimage']['tmp_name']) !== false){
+		$imgContent = addslashes(file_get_contents($_FILES['profileimage']['tmp_name']));
+	} 
+	else
+		$imgErr = "upload an image";
 
 
 	if ($firstnameErr == "" && $lastnameErr == "" && $emailErr == "" && $usernameErr == "" && $passwordErr == "" ) {
 		
-		$sql = "insert into users(firstname, lastname, email, username, password) 	values ('$firstname', '$lastname', '$email', '$username', '$password')";
+		$sql = "insert into users(firstname, lastname, email, username, password, picture) 	values ('$firstname', '$lastname', '$email', '$username', '$password', '$imgContent')";
 
 		if($con->query($sql) === true) {
 

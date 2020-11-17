@@ -1,6 +1,40 @@
 <?php 
-
 include "db.php";
+
+session_start();
+
+
+$email = $password = "";
+$emailErr = $passErr ="";
+$loginErr = "";
+
+if(isset($_POST['btn-login'])){
+	if(trim($_POST['email'])=="")
+		$emailErr = "enter email";
+	else
+		$email = strtolower(trim($_POST['email']));
+
+	if(trim($_POST['password'])=="")
+		$passErr = "enter password";
+	else {
+		$password = trim($_POST['password']);
+		$passwordEncrypt = md5($password);
+	}
+
+	if($emailErr == "" && $passErr==""){
+		$sql = "select * from users where email='$email' and password='$passwordEncrypt'";
+		$result = $con->query($sql);
+
+		if($result->num_rows > 0){
+			$_SESSION['email'] = $email;
+			header("Location: profile.php");
+		}
+		else{
+			$loginErr = "Error logging in, please try again";
+		}
+	}
+	}
+
 
 $firstname = $lastname = $email = $username = $password = "";
 $firstnameErr = $lastnameErr = $emailErr = $usernameErr = $passwordErr = "";
@@ -62,10 +96,10 @@ include "header.php";
 					</div>
 					<form  method="post" action="registerlogin.php" name="login" id="login">
 						<div class="form-group">
-							<label for="exampleInputEmail1">Email address</label> <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" style="text-decoration: none">
+							<label for="exampleInputEmail1">Email address</label> &nbsp;<span class="error"><?php echo $emailErr ?> <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" style="text-decoration: none">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Password</label> <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Password" style="text-decoration: none">
+							<label for="exampleInputEmail1">Password</label> &nbsp;<span class="error"><?php echo $passErr ?></span> <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Password" style="text-decoration: none">
 						</div>
 						<div class="text-center">
 							<input type="submit" name = "btn-login" class="btn btn-block mybtn btn-primary">LOGIN</button>

@@ -122,9 +122,8 @@ $listingob = new petlisting;
 				</div>
 			<!-- </a> -->
 		</div>
-	</article>
 	<?php } ?>
-		
+	</article>	
 <?php 
 include "footer.php"; 
 ?>

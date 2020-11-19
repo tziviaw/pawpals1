@@ -17,7 +17,7 @@ if(isset($_SESSION['username'])){
 	else{
 		$username = $_SESSION['username'];
 	} 
-
+/*
 	$user_details = $userob->getUserDetails($username, $con);
 
 	$sitter_details = $userob->getSitterDetails($username, $con);
@@ -70,7 +70,7 @@ if(isset($_SESSION['username'])){
 			}
 	
 		}
-
+*/
 ?>
 	
 <!--Main section-->
@@ -133,7 +133,6 @@ if(isset($_SESSION['username'])){
 <?php
 }
 else{
-	header("Location:loginregister.php");
+	header("Location:registerlogin.php");
 }
-include "footer.php"; 
 ?>

@@ -12,7 +12,7 @@
             return $pets;
         }
 				
-				static function hasSitterProfile($username, $con){
+	static function hasSitterProfile($username, $con){
             $sql = "select sp_id from sitterprofiles sp
             where sp.sp_username = '$username'";
             $result = $con->query($sql) or die($con->error);
@@ -23,46 +23,45 @@
             return $has_sp_id;
         }
 
-				static function getAvailability($binarydays, $con){
-						$arr = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-						
-						$search = $binarydays;
-						$search_arr = str_split($search);
-						$result = array();
-						foreach($search_arr as $key => $value){
-								if($value == 1){
-										$result[] = $arr[$key];
-								}
-						}
-						echo implode(", ", $result);
-				}
+	static function getAvailability($binarydays, $con){
+			$arr = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
 
-				function getUserDetails($username, $con){
-						$sql = "select * from users where username='$username'";
+			$search = $binarydays;
+			$search_arr = str_split($search);
+			$result = array();
+			foreach($search_arr as $key => $value){
+					if($value == 1){
+							$result[] = $arr[$key];
+					}
+			}
+			echo implode(", ", $result);
+	}
 
-						$result = $con->query($sql) or die($con->error);
-						$row = $result->fetch_assoc();
+	function getUserDetails($username, $con){
+			$sql = "select * from users where username='$username'";
 
-						return $row;
-				}
+			$result = $con->query($sql) or die($con->error);
+			$row = $result->fetch_assoc();
 
-				function getSitterDetails($username, $con){
-						$sql = "select * from sitterprofiles where sp_username ='$username'";
-						
-						$result = $con->query($sql) or die($con->error);
-						$row = $result->fetch_assoc();
-						
-						return $row;
-				} 
-				
-				function getPetDetails($username, $con){
-						$sql = "select * from petprofiles where pp_username ='$username'";
-						
-						$result = $con->query($sql) or die($con->error);
-						$row = $result->fetch_assoc();
-						
-						return $row;
-				} 
+			return $row;
+	}
+
+	function getSitterDetails($username, $con){
+			$sql = "select * from sitterprofiles where sp_username ='$username'";
+
+			$result = $con->query($sql) or die($con->error);
+			$row = $result->fetch_assoc();
+
+			return $row;
+	} 
+
+	function getPetDetails($username, $con){
+			$sql = "select * from petprofiles where pp_username ='$username'";
+
+			$result = $con->query($sql) or die($con->error);
+			$row = $result->fetch_assoc();
+
+			return $row;
+	} 
     }
-
 ?>

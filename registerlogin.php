@@ -149,18 +149,7 @@ include "header.php";
 								<div class="form-group">
 									<label for="exampleInputEmail1">Contact Number</label> <input type="contactnumber" name="contact" class="form-control" placeholder="123-456-7890">
 								</div>
-								<div class="form-group">
-									<label for="exampleInputEmail1">Availability</label><br>
-									<form action="/action_page.php">
-										<input type="checkbox" id="monday" name="monday" value="Monday"> <label for="monday">Monday</label><br>
-										<input type="checkbox" id="tuesday" name="tuesday" value="Tuesday"> <label for="tuesday">Tuesday</label><br>
-										<input type="checkbox" id="wednesday" name="wednesday" value="Wednesday"> <label for="wednesday">Wednesday</label><br>
-										<input type="checkbox" id="thursday" name="thursday" value="Thursday"> <label for="thursday">Thursday</label><br>
-										<input type="checkbox" id="friday" name="friday" value="Friday"> <label for="friday">Friday</label><br>
-										<input type="checkbox" id="saturday" name="saturday" value="Saturday"> <label for="saturday">Saturday</label><br>
-										<input type="checkbox" id="sunday" name="sunday" value="Sunday"> <label for="sunday">Sunday</label><br>
-									</form>
-								</div>
+								
 							</div>
 							
 							<div class="text-center">

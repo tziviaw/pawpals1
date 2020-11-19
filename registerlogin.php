@@ -126,10 +126,10 @@ include "header.php";
 					</div>
 					<form method="post" action="registerlogin.php" enctype = "multipart/form-data" name="registration" id="registration">
 						<div class="form-group">
-							<label for="exampleInputEmail1">First Name</label> <input type="text" name="firstname" class="form-control" value = "<?php echo $firstname; ?>" id="firstname" placeholder="First Name" aria-describedby="emailHelp">
+							<label for="exampleInputEmail1">First Name</label> <input type="text" name="fname" class="form-control" value = "<?php echo $firstname; ?>" id="firstname" placeholder="First Name" aria-describedby="emailHelp">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Last Name</label> <input type="text" name="lastname" class="form-control" value = "<?php echo $lastname; ?>" id="lastname" placeholder="Last Name" aria-describedby="emailHelp">
+							<label for="exampleInputEmail1">Last Name</label> <input type="text" name="lname" class="form-control" value = "<?php echo $lastname; ?>" id="lastname" placeholder="Last Name" aria-describedby="emailHelp">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Email address</label> <span class = "error"> <?php echo $emailErr; ?> </span> <input type="email" name="email" class="form-control" value = "<?php echo $email; ?>" id="email" placeholder="Email" aria-describedby="emailHelp" style="text-decoration: none">
@@ -144,7 +144,7 @@ include "header.php";
 							<label for="exampleFormControlFile1">Profile Type</label><br> <input type="radio" name="choice-profile" id="choice-profile-sitter"> <label for="choice-profile-sitter">Sitter</label> <input type="radio" name="choice-profile" id="choice-profile-pet"> <label for="choice-profile-pet">Pet</label> <input type="radio" name="choice-profile" id="choice-profile-both"> <label for="choice-profile-pet">Both</label>
 							<div class="reveal-if-active">
 								<div class="form-group">
-									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" name = "profileimage" class="form-control-file" id="exampleFormControlFile1">
+									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" name = "img" class="form-control-file" id="exampleFormControlFile1">
 								</div>
 								<div class="form-group">
 									<label>Zipcode</label> <input type="text" name="zipcode" class="form-control" placeholder="12345">

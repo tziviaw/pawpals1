@@ -22,7 +22,7 @@ if(isset($_SESSION['username'])){
 
 	$sitter_details = $userob->getSitterDetails($username, $con);
 
-	$image_show = $user_details['picture'];
+	$image_show = $user_details['img'];
 
 ?>
 
@@ -47,7 +47,7 @@ if(isset($_SESSION['username'])){
 					<table>
 						<tr>
 							<td class="text-left">Name:</td>
-							<td><?php echo $user_details['firstname'] ?> </td>
+							<td><?php echo $user_details['fname'] ?> </td>
 							<!--concat(users.fname, " ", users.lname)-->
 						</tr>
 						<tr>

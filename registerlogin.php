@@ -1,8 +1,6 @@
 <?php 
-include "db.php";
-
 session_start();
-
+include "db.php";
 
 $email = $password = "";
 $emailErr = $passErr ="";
@@ -22,12 +20,16 @@ if(isset($_POST['btn-login'])){
 	}
 
 	if($emailErr == "" && $passErr==""){
-		$sql = "select * from users where email='$email' and password='$passwordEncrypt'";
+		$sql= "select * from users where email='$email' and password='$passwordEncrypt'";
 		$result = $con->query($sql);
 
+
 		if($result->num_rows > 0){
-			$_SESSION['email'] = $email;
-			header("Location: profile.php");
+			$row = $result->fetch_assoc();
+			$username = $row['username'];
+			
+			$_SESSION['username'] = $username;
+			header("Location: createlisting.php");
 		}
 		else{
 			$loginErr = "Error logging in, please try again";
@@ -74,7 +76,8 @@ if(isset($_POST['btn-register'])){
 
 		if($con->query($sql) === true) {
 
-			$finalstatus = "New user registered succesfully";
+			header("Location: createprofile.php");
+// $finalstatus = "New user registered succesfully";
 			$firstname=$lastname=$email=$username=$password = "";
 		}
 		else{
@@ -105,7 +108,7 @@ include "header.php";
 							<label for="exampleInputEmail1">Password</label> &nbsp;<span class="error"><?php echo $passErr ?></span> <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Password" style="text-decoration: none">
 						</div>
 						<div class="text-center">
-							<input type="submit" name = "btn-login" class="btn btn-block mybtn btn-primary">LOGIN</button>
+							<input type="submit" name = "btn-login" class="btn btn-block mybtn btn-primary" value="Login" />
 						</div>
 						<div class="form-group">
 							<p class="text-center">Don't have an account? <a href="#" id="signup">Register here</a></p>

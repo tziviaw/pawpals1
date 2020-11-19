@@ -64,6 +64,7 @@ $listingob = new sitterlisting;
 			</div>
 	</div>
 	<?php } ?>
+	</article>
 <?php 
 include "footer.php"; 
 ?>

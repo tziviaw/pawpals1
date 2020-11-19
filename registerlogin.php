@@ -44,9 +44,9 @@ $finalstatus = "";
 
 if(isset($_POST['btn-register'])){
 
-	$firstname = ucfirst(trim($_POST['firstname']));
+	$firstname = ucfirst(trim($_POST['fname']));
 
-	$lastname =  ucfirst(trim($_POST['lastname']));
+	$lastname =  ucfirst(trim($_POST['lname']));
 
 	$email = strtolower(trim($_POST['email']));
 
@@ -72,11 +72,11 @@ if(isset($_POST['btn-register'])){
 
 	if ($firstnameErr == "" && $lastnameErr == "" && $emailErr == "" && $usernameErr == "" && $passwordErr == "" ) {
 		
-		$sql = "insert into users(firstname, lastname, email, username, password, zipcode, contact) 	values ('$firstname', '$lastname', '$email', '$username', '$password', '$zipcode', '$contact')";
+		$sql = "insert into users(fname, lname, email, username, password, zipcode, contact) 	values ('$firstname', '$lastname', '$email', '$username', '$password', '$zipcode', '$contact')";
 
 		if($con->query($sql) === true) {
 
-			header("Location: createprofile.php");
+			header("Location: createsitter.php");
 // $finalstatus = "New user registered succesfully";
 			$firstname=$lastname=$email=$username=$password = "";
 		}

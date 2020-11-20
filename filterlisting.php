@@ -15,7 +15,7 @@ if ($option = 'petlisting'){
 }
 elseif ($option = 'sitterlisting') {
     sitterlisting::filterListing($filter, $con);
-    header('Location: petlistings.php');
+    header('Location: sitterlistings.php');
 }
 
 

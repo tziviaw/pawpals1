@@ -29,7 +29,7 @@ if(isset($_POST['btn-login'])){
 			$username = $row['username'];
 			
 			$_SESSION['username'] = $username;
-			header("Location: createlisting.php");
+			header("Location: index.php");
 		}
 		else{
 			$loginErr = "Error logging in, please try again";
@@ -156,7 +156,7 @@ include "header.php";
 							</div>
 							
 							<div class="text-center">
-								<input type="submit" name = "btn-register" value="REGISTER" class="btn btn-block mybtn btn-primary />
+								<input type="submit" name = "btn-register" value="REGISTER" class="btn btn-block mybtn btn-primary" />
 							</div>
 							
 							<div>

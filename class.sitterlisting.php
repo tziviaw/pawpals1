@@ -2,12 +2,28 @@
 class sitterlisting{
     static public function getListings($con){
         $sql = "select sp_id, username, CONCAT(fname, ' ', lname) as 'fullname', sp_description, 
-        sp_availablefrom, sp_availableto, sp_days, contact, img
+        sp_availablefrom, sp_availableto, sp_days, contact, zipcode, img
         from users, sitterprofiles
         where username = sp_username;";
 
         $result = $con->query($sql);
         return $result;
+    }
+
+    static public function filterListing($filter, $con){
+        $sql = "select sp_id, username, CONCAT(fname, ' ', lname) as 'fullname', sp_description, 
+        sp_availablefrom, sp_availableto, sp_days, contact, zipcode, img
+        from users, sitterprofiles
+        where username = sp_username
+        and (username like '%$filter%' or 'fullname' like '%$filter%' or sp_description like '%$filter%'
+        or sp_days like '%$filter%' or CAST(zipcode AS CHAR) like '%$filter%' or sp_days like '%$filter%');";
+
+        $result = $con->query($sql);
+        $rows = [];
+        while ($row = $result->fetch_assoc()){
+            $rows[] = $row;
+        }
+        return $rows;
     }
 }
 

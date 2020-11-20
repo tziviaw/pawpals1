@@ -1,5 +1,31 @@
-<?php 
-include "header.php"; 
+<?php
+session_start();
+include "header.php";
+if(isset($_SESSION['username'])){
+
+	include "db.php";
+	include "class.user.php";
+	
+	$userob = new user();
+	
+	$username = $_SESSION['username'];
+
+	$username = "";
+	if(isset($_GET['user'])){
+		$username = trim($_GET['user']);
+	}
+	else{
+		$username = $_SESSION['username'];
+	} 
+
+	$user_details = $userob->getUserDetails($username, $con);
+
+	$sitter_details = $userob->getSitterDetails($username, $con);
+	
+	$pet_details = $userob->getPetDetails($username, $con);
+	
+	$image_show = $pet_details['pp_img']
+
 ?>
 
 
@@ -8,38 +34,50 @@ include "header.php";
 			<section class="col-sm-5">
 				<!--blank header tag to provide top spacing equal to about-information-->
 				<h1></h1>
-				<img src="https://via.placeholder.com/250" class="img-responsive" alt="Profile Name"/>
+				<div class="profile-img">
+				<?php
+				if($image_show==''){
+					echo '<img src="images/users.png" class="pull-left" alt="<?php echo $username ?>" id="profileImage" />';
+
+					}
+					else{
+				echo '<img src="data:image;base64,'.base64_encode($image_show).'" alt="<?php echo $username ?>" id="profileImage" />';
+				}
+				?>
+				</div>
+
 				<!--petprofiles.pp_img-->
 				<div class="profile-info">
 					<table>
 						<tr>
 							<td class="text-left">Name:</td>
-							<td>Fido</td>
+							<td><?php echo $pet_details['petname'] ?></td>
 							<!--petprofiles.petname-->
 						</tr>
 						<tr>
+
 							<td class="text-left">Location:</td>
-							<td>XXXXX, XX</td>
+							<td><?php echo $user_details['zipcode'] ?></td>
 							<!--users.location-->
 						</tr>
 						<tr>
 							<td class="text-left">Contact:</td>
-							<td>XXX-XXX-XXXX</td>
+							<td><?php echo $user_details['contact'] ?></td>
 							<!--users.contact-->
 						</tr>
 						<tr>
 							<td class="text-left">Pet Type:</td>
-							<td>Dog</td>
+							<td><?php echo $pet_details['pettype'] ?></td>
 							<!--petprofiles.pettype-->
 						</tr>
 						<tr>
 							<td class="text-left">Breed:</td>
-							<td>German Shepherd</td>
+							<td><?php echo $pet_details['petname'] ?></td>
 							<!--petprofiles.breed-->
 						</tr>
 						<tr>
 							<td class="text-left">Size:</td>
-							<td>Medium</td>
+							<td><?php echo $pet_details['size'] ?></td>
 							<!--petprofiles.size-->
 						</tr>
 					</table>
@@ -47,9 +85,9 @@ include "header.php";
 			</section>
 			<section class="col-sm-7">
 				<div class="about-information">
-					<h1>About Pet</h1>
-					<p>Information about the profile user goes here.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-					It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+					<h1>About <?php echo $pet_details['petname'] ?></h1>
+					<p> <?php echo $pet_details['pp_description'] ?> </p>
+					
 					<!--petprofiles.pp_description-->
 				</div>
 			</section>
@@ -57,6 +95,10 @@ include "header.php";
 	</div>
 </article>
 
-<?php 
-include "footer.php"; 
+<?php
+}
+else{
+	header("Location:index.php");
+}
 ?>
+

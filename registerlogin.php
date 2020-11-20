@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 <?php
 include "db.php";
 
+=======
+<?php 
+>>>>>>> e100102c6cb8265f34c7c638a2eb5dbee9005cec
 session_start();
-
+include "db.php";
 
 $email = $password = "";
 $emailErr = $passErr = "";
@@ -21,23 +25,41 @@ if (isset($_POST['btn-login'])) {
 		$passwordEncrypt = md5($password);
 	}
 
+<<<<<<< HEAD
 	if ($emailErr == "" && $passErr == "") {
 		$sql = "select * from users where email='$email' and password='$passwordEncrypt'";
 		echo $sql;
+=======
+	if($emailErr == "" && $passErr==""){
+		$sql= "select * from users where email='$email' and password='$passwordEncrypt'";
+>>>>>>> e100102c6cb8265f34c7c638a2eb5dbee9005cec
 		$result = $con->query($sql);
 		$row = $result->fetch_assoc();
 
+<<<<<<< HEAD
 		if ($result->num_rows > 0) {
 			$_SESSION['email'] = $email;
 			$_SESSION['username'] = $row['username'];
 			header("Location: sitterprofile.php");
 		} else {
+=======
+
+		if($result->num_rows > 0){
+			$row = $result->fetch_assoc();
+			$username = $row['username'];
+			
+			$_SESSION['username'] = $username;
+			header("Location: createlisting.php");
+		}
+		else{
+>>>>>>> e100102c6cb8265f34c7c638a2eb5dbee9005cec
 			$loginErr = "Error logging in, please try again";
 		}
 	}
 }
 
 
+<<<<<<< HEAD
 $firstname = $lastname = $email = $username = $password = "";
 $firstnameErr = $lastnameErr = $emailErr = $usernameErr = $passwordErr = "";
 $finalstatus = "";
@@ -49,8 +71,18 @@ if ($loginErr) {
 if (isset($_POST['btn-register'])) {
 
 	$firstname = ucfirst(trim($_POST['firstname']));
+=======
 
-	$lastname =  ucfirst(trim($_POST['lastname']));
+$firstname = $lastname = $email = $username = $password = $zipcode = $contact = "";
+$firstnameErr = $lastnameErr = $emailErr = $usernameErr = $passwordErr = "";
+$finalstatus = "";
+
+if(isset($_POST['btn-register'])){
+>>>>>>> e100102c6cb8265f34c7c638a2eb5dbee9005cec
+
+	$firstname = ucfirst(trim($_POST['fname']));
+
+	$lastname =  ucfirst(trim($_POST['lname']));
 
 	$email = strtolower(trim($_POST['email']));
 
@@ -69,6 +101,7 @@ if (isset($_POST['btn-register'])) {
 	$password = trim($_POST['password']);
 	$password = md5($password);
 
+<<<<<<< HEAD
 	if (getimagesize($_FILES['profileimage']['tmp_name']) !== false) {
 		$imgContent = addslashes(file_get_contents($_FILES['profileimage']['tmp_name']));
 	} else
@@ -78,12 +111,30 @@ if (isset($_POST['btn-register'])) {
 	if ($firstnameErr == "" && $lastnameErr == "" && $emailErr == "" && $usernameErr == "" && $passwordErr == "") {
 
 		$sql = "insert into users(firstname, lastname, email, username, password, picture) 	values ('$firstname', '$lastname', '$email', '$username', '$password', '$imgContent')";
+=======
+	$zipcode = $_POST['zipcode'];
+
+	$contact = $_POST['contact'];
+
+
+	if ($firstnameErr == "" && $lastnameErr == "" && $emailErr == "" && $usernameErr == "" && $passwordErr == "" ) {
+		
+		$sql = "insert into users(fname, lname, email, username, password, zipcode, contact) 	values ('$firstname', '$lastname', '$email', '$username', '$password', '$zipcode', '$contact')";
+>>>>>>> e100102c6cb8265f34c7c638a2eb5dbee9005cec
 
 		if ($con->query($sql) === true) {
 
+<<<<<<< HEAD
 			$finalstatus = "New user registered succesfully";
 			$firstname = $lastname = $email = $username = $password = "";
 		} else {
+=======
+			header("Location: createsitter.php");
+// $finalstatus = "New user registered succesfully";
+			$firstname=$lastname=$email=$username=$password = "";
+		}
+		else{
+>>>>>>> e100102c6cb8265f34c7c638a2eb5dbee9005cec
 			$finalstatus = $con->error;
 		}
 	}
@@ -109,7 +160,11 @@ include "header.php";
 							<label for="exampleInputEmail1">Password</label> &nbsp;<span class="error"><?php echo $passErr ?></span> <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Password" style="text-decoration: none">
 						</div>
 						<div class="text-center">
+<<<<<<< HEAD
 							<input type="submit" name="btn-login" class="btn btn-block mybtn btn-primary">LOGIN</button>
+=======
+							<input type="submit" name = "btn-login" class="btn btn-block mybtn btn-primary" value="Login" />
+>>>>>>> e100102c6cb8265f34c7c638a2eb5dbee9005cec
 						</div>
 						<div class="form-group">
 							<p class="text-center">Don't have an account? <a href="#" id="signup">Register here</a></p>
@@ -127,10 +182,17 @@ include "header.php";
 					</div>
 					<form method="post" action="registerlogin.php" enctype="multipart/form-data" name="registration" id="registration">
 						<div class="form-group">
+<<<<<<< HEAD
 							<label for="exampleInputEmail1">First Name</label> <input type="text" name="firstname" class="form-control" value="<?php echo $firstname; ?>" id="firstname" placeholder="First Name" aria-describedby="emailHelp">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Last Name</label> <input type="text" name="lastname" class="form-control" value="<?php echo $lastname; ?>" id="lastname" placeholder="Last Name" aria-describedby="emailHelp">
+=======
+							<label for="exampleInputEmail1">First Name</label> <input type="text" name="fname" class="form-control" value = "<?php echo $firstname; ?>" id="firstname" placeholder="First Name" aria-describedby="emailHelp">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Last Name</label> <input type="text" name="lname" class="form-control" value = "<?php echo $lastname; ?>" id="lastname" placeholder="Last Name" aria-describedby="emailHelp">
+>>>>>>> e100102c6cb8265f34c7c638a2eb5dbee9005cec
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Email address</label> <span class="error"> <?php echo $emailErr; ?> </span> <input type="email" name="email" class="form-control" value="<?php echo $email; ?>" id="email" placeholder="Email" aria-describedby="emailHelp" style="text-decoration: none">
@@ -145,26 +207,22 @@ include "header.php";
 							<label for="exampleFormControlFile1">Profile Type</label><br> <input type="radio" name="choice-profile" id="choice-profile-sitter"> <label for="choice-profile-sitter">Sitter</label> <input type="radio" name="choice-profile" id="choice-profile-pet"> <label for="choice-profile-pet">Pet</label> <input type="radio" name="choice-profile" id="choice-profile-both"> <label for="choice-profile-pet">Both</label>
 							<div class="reveal-if-active">
 								<div class="form-group">
+<<<<<<< HEAD
 									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" name="profileimage" class="form-control-file" id="exampleFormControlFile1">
 								</div>
 								<div class="form-group">
 									<label>Zipcode</label> <input type="text" class="form-control" placeholder="12345">
+=======
+									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" name = "img" class="form-control-file" id="exampleFormControlFile1">
+>>>>>>> e100102c6cb8265f34c7c638a2eb5dbee9005cec
 								</div>
 								<div class="form-group">
-									<label for="exampleInputEmail1">Contact Number</label> <input type="contactnumber" name="" class="form-control" placeholder="123-456-7890">
+									<label>Zipcode</label> <input type="text" name="zipcode" class="form-control" placeholder="12345">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputEmail1">Availability</label><br>
-									<form action="/action_page.php">
-										<input type="checkbox" id="monday" name="monday" value="Monday"> <label for="monday">Monday</label><br>
-										<input type="checkbox" id="tuesday" name="tuesday" value="Tuesday"> <label for="tuesday">Tuesday</label><br>
-										<input type="checkbox" id="wednesday" name="wednesday" value="Wednesday"> <label for="wednesday">Wednesday</label><br>
-										<input type="checkbox" id="thursday" name="thursday" value="Thursday"> <label for="thursday">Thursday</label><br>
-										<input type="checkbox" id="friday" name="friday" value="Friday"> <label for="friday">Friday</label><br>
-										<input type="checkbox" id="saturday" name="saturday" value="Saturday"> <label for="saturday">Saturday</label><br>
-										<input type="checkbox" id="sunday" name="sunday" value="Sunday"> <label for="sunday">Sunday</label><br>
-									</form>
+									<label for="exampleInputEmail1">Contact Number</label> <input type="contactnumber" name="contact" class="form-control" placeholder="123-456-7890">
 								</div>
+								
 							</div>
 
 							<div class="text-center">

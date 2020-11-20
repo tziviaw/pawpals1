@@ -9,17 +9,16 @@ class petlisting{
         and username = pp_username
         order by pl_datecreated desc;";
 
-        $result = $con->query($sql);
+        $result = $con->query($sql) or die($con->error);
         return $result;
-    }
+	}
 
-    static function createListing($description, $username, $petid, $dateneededfrom, $dateneededto, $con){
+	static function createListing($description, $username, $petid, $dateneededfrom, $dateneededto, $con){
         $sql = "insert into petlistings (pl_username, pl_pp_id, pl_description, pl_neededfrom, 
-                pl_neededto) 
-                VALUES ('$username', $petid, '$description', '$dateneededfrom', '$dateneededto')";
-               
-        echo $sql;
-        $result = $con->query($sql);
+                        pl_neededto) 
+                        VALUES ('$username', $petid, '$description', '$dateneededfrom', '$dateneededto')";
+        $result = $con->query($sql) or die($con->error);
+
         return $result;
     }
 
@@ -42,4 +41,3 @@ class petlisting{
     }
 
 }
-?>

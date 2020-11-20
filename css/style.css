@@ -162,6 +162,7 @@ textarea {
 
 table, img {
 	margin: 0 auto;
+	max-width: 100%!important;
 }
 
 .about-information{

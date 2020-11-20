@@ -126,6 +126,12 @@ $filter = @$_GET['search'];
 						<h4><?php echo $listing_pet ?></h4>
 					</div>
 				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<label>Date Needed From:</label>
+					<input type="date" name="neededfrom" class="form-control" rows="1">
+				</div>	
 				<div class="col-md-6">
 					<div class="listing-details">
 						<p><b>Description:	</b> <?php echo $listing_description ?></p>
@@ -140,17 +146,15 @@ $filter = @$_GET['search'];
 						<p><b>Contact: 	</b> <?php echo $listing_contact?></p>
 					</div>
 				</div>
-			</div>
-		<!-- </a> -->
-	</div>
+			<!-- </a> -->
+		</div>
 	<?php } ?>
-		
+	</article>	
 <?php 
 include "footer.php"; 
 ?>
 
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-
 
 <!--script for opening/closing the create new listing form -->
 <script>

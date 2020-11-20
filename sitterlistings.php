@@ -77,6 +77,7 @@ $filter = @$_GET['search'];
 			</div>
 	</div>
 	<?php } ?>
+	</article>
 <?php 
 include "footer.php"; 
 ?>

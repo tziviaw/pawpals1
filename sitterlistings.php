@@ -9,19 +9,30 @@ include "header.php";
 
 $user = new user;
 $listingob = new sitterlisting;
+$filter = @$_GET['search'];
 
 ?>
 	<!-- Sitters who are looking to sit pets -->
 	<div class="container-fluid text-center">
 		<h1>Sitters Looking for Work</h1>
+		<form id="filter-form" action="petlistings.php" method = "get" style="display: inline-flex">
+			<input required type="search" name="search" id="q" placeholder="search"rows="1" style="width: 150px" value="<?=$filter?>"></input>
+			<button type="submit" option = "pet" class="submit-search-btn"><span class="glyphicon glyphicon-search"></span></button>
+		</form>
 	</div>
 	
-	<!--listings-->
-	<!--retrieves all sitter profiles as listings-->
+<?php 
+	$listings = sitterlisting::filterListing($filter, $con);
 
-	<?php 
-		$listings = $listingob->getListings($con);
-		while($row = $listings->fetch_assoc()){
+	if (count($listings) == 0) {
+		echo '<div class="container text-center">
+			<div class="row listing-row">
+			No Listings
+			</div>
+			</div>';
+	} 
+		// $listings = $listingob->getListings($con);
+		foreach($listings as $row){
 			$listing_img = $row['img'];
 			$listing_username = $row['username'];
 			$listing_name = $row['fullname'];
@@ -40,10 +51,10 @@ $listingob = new sitterlisting;
 					<div class="profile-picture">
 						<?php
 						if($listing_img==''){
-						echo '<a href="sitterprofile.php?pet=<?php echo $listing_id?>"><img src="images/profile-pic.jpg" alt="profile picture" class="img-rounded" height="120px"></a>';
+						echo '<a href="sitterprofile.php?pet=' . $listing_id . '"><img src="images/profile-pic.jpg" alt="profile picture" class="img-rounded" height="120px"></a>';
 						} 
 						else{
-							echo '<a href="sitterprofile.php?pet=<?php echo $listing_id?>"><img src="data:image/jpeg;base64,'.base64_encode($listing_img).'" class="listingimage" 
+							echo '<a href="sitterprofile.php?sitter=' . $listing_id . '"><img src="data:image/jpeg;base64,'.base64_encode($listing_img).'" class="listingimage" 
 							alt="profile picture height="120px" style="width: 120px; height: 120px;" /></a>';
 						}
 						?>
@@ -69,3 +80,10 @@ $listingob = new sitterlisting;
 <?php 
 include "footer.php"; 
 ?>
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script>
+	
+
+</script>

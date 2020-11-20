@@ -1,8 +1,9 @@
 <?php 
 session_start();
-$username = 'user1';
+if (isset($_SESSION['username'])){
+	$username = $_SESSION['username'];
+}
 
-// if(isset($SESSION['username'])){}
 
 include "db.php";
 include "class.user.php";
@@ -11,14 +12,21 @@ include "header.php";
 
 $user = new user;
 $listingob = new petlisting;
-
-// $username = $_SESSION('username');
+$filter = @$_GET['search'];
 
 ?>
 	<div class="container-fluid text-center">
 		<h1>Pets That Need Sitting</h1>
+		<form id="filter-form" action="petlistings.php" method = "get" style="display: inline-flex">
+			<input type="search" name="search" id="q" placeholder="search"rows="1" style="width: 150px" value="<?=$filter?>"></input>
+			&nbsp; <button type="submit" option = "pet" class="submit-search-btn"><span class="glyphicon glyphicon-search"></span></button>
+		</form>
 	</div>
 	
+
+	<?php if ($username == ''){
+		echo '<div class="container-fluid text-center"><a href="registerlogin.php"> Sign In or Register to create a new listing </a></div>';
+	} else{?>
 	<!-- Holds button for form to create new listing-->
 	<div class="container-fluid text-center">
 	<button class="open-button" id="show-button" onclick="openForm(); getElementById('form-popup').style.display = 'block'; this.style.display = 'none'">Create New Listing</button>
@@ -30,33 +38,33 @@ $listingob = new petlisting;
 	<form class="form-group form-container" action="createlisting.php" method="post">
 		<div class="row">
 			<div class="col-md-12">
-				<label for="sel1">Pet</label>
+				<label for="sel1" id="formpet">Pet</label>
 				<select class="form-control" id="sel1" name="pp_id">
 				<?php 
 				$pets = user::getPets($username, $con);
 				print_r($pets);
+				echo '<option value=""</option>';
 				foreach($pets as $pet) {
 					echo "<option value=" . $pet["pp_id"] . ">" . $pet["petname"] . "</option>";
 				}
 				?>
 				</select> 
-
 			</div>	
 		</div>
 		<div class="row">
 			<div class="col-md-12 form-group">
-				<label for="exampleFormControlTextarea1">Description</label>
-				<textarea name="description" class="form-control" id="exampleFormControlTextarea1" placeholder="Description" rows="2" style="resize: vertical"></textarea>
+				<label for="exampleFormControlTextarea1"> Description</label>
+				<textarea name="description" class="form-control" id="description" placeholder="Description" rows="2" style="resize: vertical"></textarea>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-6">
 				<label>Date Needed From:</label>
-				<input type="date" name="neededfrom" class="form-control" rows="1">
+				<input type="date" name="neededfrom" id="neededfrom" class="form-control" rows="1">
 			</div>	
 			<div class="col-md-6">
 				<label>Date Needed To:</label>
-				<input type="date" name="neededto" class="form-control" rows="1">
+				<input type="date" name="neededto" id = "neededto" class="form-control" rows="1">
 			</div>	
 		</div>
 		<div class="form-inline text-center">
@@ -64,6 +72,8 @@ $listingob = new petlisting;
 			<button type="submit" class="submit-cancel-btn" onclick="closeForm()">Close</button>
 		</div>
 	</form>
+<?php }?>
+
 
 	</div>
 	<!--listings-->
@@ -71,8 +81,17 @@ $listingob = new petlisting;
 
 	<!-- retrieves all listing data from database where start date is at least-->
 	<?php
-		$listings = $listingob->getListings($con);
-		while($row = $listings->fetch_assoc()){
+
+		$listings = petlisting::filterListing($filter, $con);
+
+		if (count($listings) == 0) {
+			echo '<div class="container text-center nolistings">
+				<div class="row listing-row">
+				No Listing Results
+				</div>
+				</div>';
+		}
+		foreach($listings as $row) {
 			$listing_img = $row['img'];
 			$listing_pet = $row['petname'];
 			$listing_ptype = $row['pettype'];
@@ -96,10 +115,10 @@ $listingob = new petlisting;
 					<div class="profile-picture">
 						<?php
 						if($listing_img==''){
-							echo '<a href="petprofile.php?pet=<?php echo $listing_petid?>"><img src="images/profile-pic.jpg" alt="profile picture" class="img-rounded" height="120px"></a>';
+							echo '<a href="petprofile.php?pet=' . $listings_petid . '"><img src="images/profile-pic.jpg" alt="profile picture" class="img-rounded" height="120px"/></a>';
 						}
 						else{
-							echo'<a href="petprofile.php?pet=<?php echo $listing_petid?>"><img src="data:image/jpeg;base64,'.base64_encode($listing_img).'" class="listingimage" 
+							echo'<a href="petprofile.php?pet=' . $listings_petid . '"><img src="data:image/jpeg;base64,'.base64_encode($listing_img).'" class="listingimage" 
 							alt="profile picture height="120px" style="width: 120px; height: 120px;" /></a>';
 						}
 						?>
@@ -131,7 +150,7 @@ include "footer.php";
 ?>
 
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="js/bootstrap.js"></script>
+
 
 <!--script for opening/closing the create new listing form -->
 <script>
@@ -151,6 +170,14 @@ include "footer.php";
 <!-- Helps POST and alert user when form submission is successful and listing is created-->
 <script>
 	$('.submit-listing-btn').click(function(e){
+
+		if ($('#sel1').val() == "" || $('#description').val() == ""
+				|| $('#neededfrom').val() == "" || $('#neededto').val() == ""){
+					alert("Fields cannot be blank.");
+
+		}
+		else{
+		
 		var r = confirm("Are you sure you want to submit");
 
 		if(r==true){
@@ -159,9 +186,10 @@ include "footer.php";
 		alert("Submission Successful.");
 		})
 		.fail(function() {
-			alert( "error" );
+			alert( "Error Creating Listing" );
 		});
-	}
+		}
+		}
 
 	})
 </script>

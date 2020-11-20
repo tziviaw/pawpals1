@@ -16,7 +16,7 @@ class petlisting{
 	static function createListing($description, $username, $petid, $dateneededfrom, $dateneededto, $con){
         $sql = "insert into petlistings (pl_username, pl_pp_id, pl_description, pl_neededfrom, 
                         pl_neededto) 
-                        VALUES ('$username', $petid, '$description', '$dateneededfrom', '$dateneededto')";
+                        VALUES ('$username', $petid, '$description', $dateneededfrom, $dateneededto)";
         $result = $con->query($sql) or die($con->error);
 
         return $result;

@@ -34,11 +34,11 @@ if(isset($_SESSION['username'])){
 			<h1></h1>
 			<?php
 				if($image_show==''){
-					echo '<img src="images/users.png" class="pull-left img-profile" alt="<?php echo $username ?>" id="profileImage" />';
+					echo '<img src="images/users.png" class="pull-left img-profile" alt="' . $username . '" id="profileImage" />';
 
 					}
 					else{
-				echo '<img src="data:image;base64,'.base64_encode($image_show).'" alt="<?php echo $username ?>" id="profileImage" />';
+				echo '<img src="data:image;base64,'.base64_encode($image_show).'" alt="' . $username . '" id="profileImage" />';
 				}
 				?>
 		

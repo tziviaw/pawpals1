@@ -15,11 +15,15 @@ class sitterlisting{
         sp_availablefrom, sp_availableto, sp_days, contact, zipcode, img
         from users, sitterprofiles
         where username = sp_username
-        and (username like '%$filter%' or 'fullname' like '%$filter%' or sp_description like '%$filter'
-        or sp_days like '%$filter%' or zipcode like '%$filter%');";
+        and (username like '%$filter%' or 'fullname' like '%$filter%' or sp_description like '%$filter%'
+        or sp_days like '%$filter%' or CAST(zipcode AS CHAR) like '%$filter%' or sp_days like '%$filter%');";
 
         $result = $con->query($sql);
-        return $result;
+        $rows = [];
+        while ($row = $result->fetch_assoc()){
+            $rows[] = $row;
+        }
+        return $rows;
     }
 }
 

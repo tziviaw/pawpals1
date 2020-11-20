@@ -12,6 +12,11 @@ $description = $_POST['description'];
 $neededfrom = $_POST['neededfrom'];
 $neededto = $_POST['neededto'];
 
-petlisting::createListing($description, $username, $pp_id, $neededfrom, $neededto, $con);
+if ($username==""||$pp_id==""||$description==""||$neededfrom==""||$neededto==""){
+    header('Location: petlistings.php');
+}
+else{
+    petlisting::createListing($description, $username, $pp_id, $neededfrom, $neededto, $con);
 
-header('Location: petlistings.php');
+    header('Location: petlistings.php');
+}

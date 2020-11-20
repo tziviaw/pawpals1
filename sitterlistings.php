@@ -1,6 +1,8 @@
 <?php 
 session_start();
-$username = 'user1';
+if (isset($_SESSION['username'])){
+	$username = $_SESSION['username'];
+}
 
 include "db.php";
 include "class.user.php";
@@ -15,8 +17,9 @@ $filter = @$_GET['search'];
 	<!-- Sitters who are looking to sit pets -->
 	<div class="container-fluid text-center">
 		<h1>Sitters Looking for Work</h1>
-		<form id="filter-form" action="petlistings.php" method = "get" style="display: inline-flex">
-			<input required type="search" name="search" id="q" placeholder="search"rows="1" style="width: 150px" value="<?=$filter?>"></input>
+		<form id="filter-form" action="sitterlistings.php" method = "get" style="display: inline-flex">
+			<input type="search" name="search" id="q" placeholder="search"rows="1" style="width: 150px" value="<?=$filter?>"></input>
+			&nbsp; 
 			<button type="submit" option = "pet" class="submit-search-btn"><span class="glyphicon glyphicon-search"></span></button>
 		</form>
 	</div>
@@ -51,7 +54,7 @@ $filter = @$_GET['search'];
 					<div class="profile-picture">
 						<?php
 						if($listing_img==''){
-						echo '<a href="sitterprofile.php?pet=' . $listing_id . '"><img src="images/profile-pic.jpg" alt="profile picture" class="img-rounded" height="120px"></a>';
+						echo '<a href="sitterprofile.php?sitter=' . $listing_id . '"><img src="images/profile-pic.jpg" alt="profile picture" class="img-rounded" height="120px"></a>';
 						} 
 						else{
 							echo '<a href="sitterprofile.php?sitter=' . $listing_id . '"><img src="data:image/jpeg;base64,'.base64_encode($listing_img).'" class="listingimage" 

@@ -3,7 +3,9 @@ session_start();
 if (isset($_SESSION['username'])){
 	$username = $_SESSION['username'];
 }
-
+else{
+	$username = "";
+}
 
 include "db.php";
 include "class.user.php";
@@ -76,8 +78,6 @@ $filter = @$_GET['search'];
 
 
 	</div>
-	<!--listings-->
-	<h3 class="text-center">Listings</h3>
 
 	<!-- retrieves all listing data from database where start date is at least-->
 	<?php
@@ -108,7 +108,7 @@ $filter = @$_GET['search'];
 	?>		
 
 	<!--pictures need to have links to the respective profile page-->
-	<div class="container text-center">
+	<div class="container-fluid text-center">
 		<!-- <a class="profile-link" href="petprofile.php"> -->
 			<div class="row listing-row">
 				<div class="col-md-3">
@@ -124,14 +124,8 @@ $filter = @$_GET['search'];
 						?>
 						</br>
 						<h4><?php echo $listing_pet ?></h4>
-					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<label>Date Needed From:</label>
-					<input type="date" name="neededfrom" class="form-control" rows="1">
-				</div>	
 				<div class="col-md-6">
 					<div class="listing-details">
 						<p><b>Description:	</b> <?php echo $listing_description ?></p>
@@ -148,6 +142,7 @@ $filter = @$_GET['search'];
 				</div>
 			<!-- </a> -->
 		</div>
+	</div>
 	<?php } ?>
 	</article>	
 <?php 
@@ -178,7 +173,6 @@ include "footer.php";
 		if ($('#sel1').val() == "" || $('#description').val() == ""
 				|| $('#neededfrom').val() == "" || $('#neededto').val() == ""){
 					alert("Fields cannot be blank.");
-
 		}
 		else{
 		

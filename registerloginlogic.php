@@ -21,16 +21,18 @@ if(isset($_POST['btn-login'])){
 		$sql= "select * from users where email='$email' and password='$passwordEncrypt'";
 		$result = $con->query($sql);
 
-
 		if($result->num_rows > 0){
 			$row = $result->fetch_assoc();
 			$username = $row['username'];
 			
 			$_SESSION['username'] = $username;
 			header("Location: index.php");
+			exit;
 		}
 		else{
 			$loginErr = "Error logging in, please try again";
+			echo $loginErr;
+			// exit;
 		}
 	}
 }

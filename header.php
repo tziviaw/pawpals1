@@ -1,3 +1,32 @@
+<?php
+include "db.php";
+include "class.user.php";
+
+session_start();
+$user = new user;
+
+include "registerloginlogic.php";
+
+$haspets = false;
+$mysp = [];
+
+if(isset($_SESSION["username"])){
+	
+	$username = $_SESSION["username"];
+	
+	$pets = user::getPets($username, $con);
+	$mysp = user::getSitterDetails($username, $con);
+	
+	//set the $haspets flag based on the contents of $pets for use in the dropdown menu
+	if(!empty($pets)){
+		$haspets = true;
+	}
+} else {
+	$username = '';
+}
+	
+?>
+		
 <!DOCTYPE html>
 
 <html>
@@ -16,59 +45,27 @@
 	document.write('<style type="text/css">body{display:none}</style>');
 	jQuery(function($) {
 		$('body').css('display','block');
-	});
+		checkUserSession();
 
-	<?php
-	include "db.php";
-	include "class.user.php";
-	
-	session_start();
-	$user = new user;
-	
-	include "registerloginlogic.php";
-	
-	$haspets = false;
-	$mysp = [];
-	
-	if(isset($_SESSION["username"])){
-		
-		$username = $_SESSION["username"];
-		
-		$pets = user::getPets($username, $con);
-		$mysp = user::getSitterDetails($username, $con);
-		
-		//set the $haspets flag based on the contents of $pets for use in the dropdown menu
-		if(!empty($pets)){
-			$haspets = true;
-		}
-	} else {
-		$username = '';
-	}
-	
-	?>
-	
 	//hides or shows a combination of user-related-buttons, registerlogin-button, my-pet-menu, and my-sitter-profile
 	//based on the values of $_SESSION['username'], $haspets, and $has_sp_id
+	});
+
 	function checkUserSession() {
-		if ("<?php echo !empty($_SESSION['username']) ?>") {
-			document.getElementById("registerlogin-button").style.display = "none";
-			if (!"<?php echo $haspets ?>") {
-				document.getElementById("my-pet-menu").style.display = "none";
+		if (<?php echo !empty($_SESSION['username']) ?>) {
+			$('#registerlogin-button').hide();
+			if (!<?php echo $haspets ?>) {
+				$('my-pet-menu').hide();
 			}
-			if ("<?php echo empty($mysp) ?>") {
-				document.getElementById("my-sitter-profile").style.display = "none";
+			if (<?php echo !empty($mysp) ? 1 : 0 ?>) {
+				$('#my-sitter-profile').hide();
 			}
 		} else {
-			var x = document.getElementsByClassName("user-related-buttons");
-			var i;
-			for (i = 0; i < x.length; i++) {
-				x[i].style.display = "none";
-			}
+			$('.user-related-buttons').hide();
 		}
+
 	}
-	
-	//calls checkUserSession()
-	$(checkUserSession);
+
 </script>
 
 </head>

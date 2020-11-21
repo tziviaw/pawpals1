@@ -6,20 +6,23 @@ $listingob = new petlisting;
 $filter = @$_GET['search'];
 
 ?>
-	<div class="container-fluid text-center">
-		<h1>Pets That Need Sitting</h1>
+
+	<div class="container-fluid text-right">
 		<form id="filter-form" action="petlistings.php" method = "get" style="display: inline-flex">
 			<input type="search" name="search" id="q" placeholder="search"rows="1" style="width: 150px" value="<?=$filter?>"></input>
 			&nbsp; <button type="submit" option = "pet" class="submit-search-btn"><span class="glyphicon glyphicon-search"></span></button>
 		</form>
 	</div>
-	
+
+	<div class="container-fluid text-center">
+		<h1>Pets That Need Sitting</h1>
+	</div>
 
 	<?php if ($username == ''){
 		echo '<div class="container-fluid text-center"><a href="registerlogin.php"> Sign In or Register to create a new listing </a></div>';
 	} else{?>
 	<!-- Holds button for form to create new listing-->
-	<div class="container-fluid text-center">
+	<div class="container-fluid text-center createlisting">
 	<button class="open-button" id="show-button" onclick="openForm(); getElementById('form-popup').style.display = 'block'; this.style.display = 'none'">Create New Listing</button>
 	</div>
 	

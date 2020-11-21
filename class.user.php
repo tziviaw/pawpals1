@@ -26,7 +26,7 @@
 						echo implode(", ", $result);
 				}
 
-				function getUserDetails($username, $con){
+				static function getUserDetails($username, $con){
 						$sql = "select * from users where username='$username'";
 
 						$result = $con->query($sql) or die($con->error);
@@ -35,7 +35,7 @@
 						return $row;
 				}
 
-				function getSitterDetails($username, $con){
+				static function getSitterDetails($username, $con){
 						$sql = "select * from sitterprofiles where sp_username ='$username'";
 						
 						$result = $con->query($sql) or die($con->error);

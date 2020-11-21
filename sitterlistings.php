@@ -1,15 +1,7 @@
 <?php 
-session_start();
-if (isset($_SESSION['username'])){
-	$username = $_SESSION['username'];
-}
-
-include "db.php";
-include "class.user.php";
 include "class.sitterlisting.php";
 include "header.php"; 
 
-$user = new user;
 $listingob = new sitterlisting;
 $filter = @$_GET['search'];
 
@@ -48,7 +40,7 @@ $filter = @$_GET['search'];
 			$listing_id = $row['sp_id'];
 
 	?>
-	<div class="container text-center">
+	<div class="container-fluid text-center">
 			<div class="row listing-row">
 				<div class="col-md-3">
 					<div class="profile-picture">
@@ -84,10 +76,3 @@ $filter = @$_GET['search'];
 <?php 
 include "footer.php"; 
 ?>
-
-<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
-
-<script>
-	
-
-</script>

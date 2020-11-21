@@ -1,18 +1,7 @@
-<?php 
-session_start();
-if (isset($_SESSION['username'])){
-	$username = $_SESSION['username'];
-}
-else{
-	$username = "";
-}
-
-include "db.php";
-include "class.user.php";
-include "class.petlisting.php";
+<?php
 include "header.php"; 
+include "class.petlisting.php";
 
-$user = new user;
 $listingob = new petlisting;
 $filter = @$_GET['search'];
 

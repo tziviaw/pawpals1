@@ -1,93 +1,6 @@
 <?php 
-session_start();
-include "db.php";
-
-$email = $password = "";
-$emailErr = $passErr ="";
-$loginErr = "";
-
-if(isset($_POST['btn-login'])){
-	if(trim($_POST['email'])=="")
-		$emailErr = "enter email";
-	else
-		$email = strtolower(trim($_POST['email']));
-
-	if(trim($_POST['password'])=="")
-		$passErr = "enter password";
-	else {
-		$password = trim($_POST['password']);
-		$passwordEncrypt = md5($password);
-	}
-
-	if($emailErr == "" && $passErr==""){
-		$sql= "select * from users where email='$email' and password='$passwordEncrypt'";
-		$result = $con->query($sql);
-
-
-		if($result->num_rows > 0){
-			$row = $result->fetch_assoc();
-			$username = $row['username'];
-			
-			$_SESSION['username'] = $username;
-			header("Location: index.php");
-		}
-		else{
-			$loginErr = "Error logging in, please try again";
-		}
-	}
-	}
-
-
-$firstname = $lastname = $email = $username = $password = $zipcode = $contact = "";
-$firstnameErr = $lastnameErr = $emailErr = $usernameErr = $passwordErr = "";
-$finalstatus = "";
-
-if(isset($_POST['btn-register'])){
-
-	$firstname = ucfirst(trim($_POST['fname']));
-
-	$lastname =  ucfirst(trim($_POST['lname']));
-
-	$email = strtolower(trim($_POST['email']));
-
-	$sqlEmail = "select * from users where email = '$email'";
-	$resultEmail = $con->query($sqlEmail);
-	if($resultEmail->num_rows > 0)
-		$emailErr = "Email exists, please choose another one or try logging in";
-
-	$username = strtolower(trim($_POST['username']));
-
-	$sqlUsername = "select * from users where username = '$username'";
-	$result = $con->query($sqlUsername);
-	if($result->num_rows > 0) 
-		$usernameErr = "Username exists, please choose another one or try logging in";
-
-	$password = trim($_POST['password']);
-		$password = md5($password);
-
-	$zipcode = $_POST['zipcode'];
-
-	$contact = $_POST['contact'];
-
-
-	if ($firstnameErr == "" && $lastnameErr == "" && $emailErr == "" && $usernameErr == "" && $passwordErr == "" ) {
-		
-		$sql = "insert into users(fname, lname, email, username, password, zipcode, contact) 	values ('$firstname', '$lastname', '$email', '$username', '$password', '$zipcode', '$contact')";
-
-		if($con->query($sql) === true) {
-
-			header("Location: createsitter.php");
-// $finalstatus = "New user registered succesfully";
-			$firstname=$lastname=$email=$username=$password = "";
-		}
-		else{
-			$finalstatus = $con->error;
-		}
-
-	}
-
-}
 include "header.php"; 
+//registerlogin php code isolated in registerloginlogic.php and included near the top of header.php
 ?>
 		<div class="container">
 		<div class="row">
@@ -126,10 +39,10 @@ include "header.php";
 					</div>
 					<form method="post" action="registerlogin.php" enctype = "multipart/form-data" name="registration" id="registration">
 						<div class="form-group">
-							<label for="exampleInputEmail1">First Name</label> <input type="text" name="fname" class="form-control" value = "<?php echo $firstname; ?>" id="firstname" placeholder="First Name" aria-describedby="emailHelp">
+							<label for="exampleInputEmail1">First Name</label> <input type="text" name="fname" class="form-control" value = "<?php echo $fname; ?>" id="fname" placeholder="First Name" aria-describedby="emailHelp">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Last Name</label> <input type="text" name="lname" class="form-control" value = "<?php echo $lastname; ?>" id="lastname" placeholder="Last Name" aria-describedby="emailHelp">
+							<label for="exampleInputEmail1">Last Name</label> <input type="text" name="lname" class="form-control" value = "<?php echo $lname; ?>" id="lname" placeholder="Last Name" aria-describedby="emailHelp">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Email address</label> <span class = "error"> <?php echo $emailErr; ?> </span> <input type="email" name="email" class="form-control" value = "<?php echo $email; ?>" id="email" placeholder="Email" aria-describedby="emailHelp" style="text-decoration: none">
@@ -144,7 +57,7 @@ include "header.php";
 							<label for="exampleFormControlFile1">Profile Type</label><br> <input type="radio" name="choice-profile" id="choice-profile-sitter"> <label for="choice-profile-sitter">Sitter</label> <input type="radio" name="choice-profile" id="choice-profile-pet"> <label for="choice-profile-pet">Pet</label> <input type="radio" name="choice-profile" id="choice-profile-both"> <label for="choice-profile-pet">Both</label>
 							<div class="reveal-if-active">
 								<div class="form-group">
-									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" name = "img" class="form-control-file" id="exampleFormControlFile1">
+									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" name = "profileimage" class="form-control-file" id="exampleFormControlFile1">
 								</div>
 								<div class="form-group">
 									<label>Zipcode</label> <input type="text" name="zipcode" class="form-control" placeholder="12345">
@@ -172,7 +85,7 @@ include "header.php";
 		</div>
 		</div>
 	</article>
-    
+  <script src="js/registerlogin.js"></script>
 <?php 
 include "footer.php"; 
 ?>

@@ -1,31 +1,11 @@
 <?php
-session_start();
-include "header.php";
-if(isset($_SESSION['username'])){
-
-	include "db.php";
-	include "class.user.php";
+	include "header.php";
 	
-	$userob = new user();
+	$pp_id = $_GET['pet'];
 	
-	$username = $_SESSION['username'];
-
-	$username = "";
-	if(isset($_GET['user'])){
-		$username = trim($_GET['user']);
-	}
-	else{
-		$username = $_SESSION['username'];
-	} 
-
-	$user_details = $userob->getUserDetails($username, $con);
-
-	$sitter_details = $userob->getSitterDetails($username, $con);
+	$pet_details = $user->getPetProfile($pp_id, $con);
 	
-	$pet_details = $userob->getPetDetails($username, $con);
-	
-	$image_show = $pet_details['pp_img']
-
+	$image_show = $pet_details['pp_img'];
 ?>
 
 
@@ -34,16 +14,15 @@ if(isset($_SESSION['username'])){
 			<section class="col-sm-5">
 				<!--blank header tag to provide top spacing equal to about-information-->
 				<h1></h1>
-				<div class="profile-img">
-				<?php
-				if($image_show==''){
-					echo '<img src="images/users.png" class="pull-left" alt="<?php echo $username ?>" id="profileImage" />';
-
+				<div class="profile-img text-center">
+					<?php
+					if($image_show==''){
+							echo '<img src="images/profile-pic.jpg"  alt="<?php echo $username ?>" style="width: 250px; height: 250px;"/>';
+						}
+						else{
+					echo '<img src="data:image;base64,'.base64_encode($image_show).'" alt="<?php echo $username ?>"/>';
 					}
-					else{
-				echo '<img src="data:image;base64,'.base64_encode($image_show).'" alt="<?php echo $username ?>" id="profileImage" />';
-				}
-				?>
+					?>
 				</div>
 
 				<!--petprofiles.pp_img-->
@@ -57,12 +36,12 @@ if(isset($_SESSION['username'])){
 						<tr>
 
 							<td class="text-left">Location:</td>
-							<td><?php echo $user_details['zipcode'] ?></td>
+							<td><?php echo $pet_details['zipcode'] ?></td>
 							<!--users.location-->
 						</tr>
 						<tr>
 							<td class="text-left">Contact:</td>
-							<td><?php echo $user_details['contact'] ?></td>
+							<td><?php echo $pet_details['contact'] ?></td>
 							<!--users.contact-->
 						</tr>
 						<tr>
@@ -96,9 +75,6 @@ if(isset($_SESSION['username'])){
 </article>
 
 <?php
-}
-else{
-	header("Location:index.php");
-}
+include "footer.php";
 ?>
 

@@ -37,7 +37,14 @@ $filter = @$_GET['search'];
 			$listing_description = $row['sp_description'];
 			$listing_availablefrom = $row['sp_availablefrom'];
 			$listing_availableto = $row['sp_availableto'];
-			$listing_days = $row['sp_days'];
+			// $listing_days = $row['sp_days'];
+			$listing_sun = $row['sp_sun'];
+			$listing_mon = $row['sp_mon'];
+			$listing_tues = $row['sp_tues'];
+			$listing_wed = $row['sp_wed'];
+			$listing_thurs = $row['sp_thurs'];
+			$listing_fri = $row['sp_fri'];
+			$listing_sat = $row['sp_sat'];
 			$listing_contact = $row['contact'];
 			$listing_zipcode = $row['zipcode'];
 			$listing_id = $row['sp_id'];
@@ -66,7 +73,7 @@ $filter = @$_GET['search'];
 					</br>
 						<p><b>Available From: </b> <?php echo $listing_availablefrom?></p>
 						<p><b>Available To: </b> <?php echo $listing_availableto?></p>
-						<p><b>Days Available: </b> <?php $user->getAvailability($listing_days, $con);?></p>
+						<p><b>Days Available: </b> <?php $user->getAvailability($listing_sun, $listing_mon, $listing_tues, $listing_wed, $listing_thurs, $listing_fri, $listing_sat, $con);?></p>
 						<p><b>Zipcode Location: </b> <?php echo $listing_zipcode?></p>
 						<p><b>Contact: </b> <?php echo $listing_contact?></p>
 

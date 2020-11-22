@@ -54,8 +54,8 @@ include "header.php";
 							<label for="exampleInputEmail1">Password</label>  <input type="password" name="password" class="form-control" value = "<?php echo $password; ?>" id="password" placeholder="Password" aria-describedby="emailHelp" style="text-decoration: none">
 						</div>
 						<div class="form-group">
-							<label for="exampleFormControlFile1">Profile Type</label><br> <input type="radio" name="choice-profile" id="choice-profile-sitter"> <label for="choice-profile-sitter">Sitter</label> <input type="radio" name="choice-profile" id="choice-profile-pet"> <label for="choice-profile-pet">Pet</label> <input type="radio" name="choice-profile" id="choice-profile-both"> <label for="choice-profile-pet">Both</label>
-							<div class="reveal-if-active">
+							<label for="exampleFormControlFile1">Profile Type</label><br> <input type="radio" name="choice-profile" id="choice-profile-sitter" value="sitter"> <label for="choice-profile-sitter">Sitter</label> <input type="radio" name="choice-profile" id="choice-profile-pet" value="pet"> <label for="choice-profile-pet">Pet</label> <input type="radio" name="choice-profile" id="choice-profile-both" value="both"> <label for="choice-profile-pet">Both</label>
+							<!-- <div class="reveal-if-active">
 								<div class="form-group">
 									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" name = "profileimage" class="form-control-file" id="exampleFormControlFile1">
 								</div>
@@ -66,7 +66,7 @@ include "header.php";
 									<label for="exampleInputEmail1">Contact Number</label> <input type="contactnumber" name="contact" class="form-control" placeholder="123-456-7890">
 								</div>
 								
-							</div>
+							</div> -->
 							
 							<div class="text-center">
 								<input type="submit" name = "btn-register" value="REGISTER" class="btn btn-block mybtn btn-primary" />

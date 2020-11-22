@@ -6,14 +6,17 @@ $listingob = new sitterlisting;
 $filter = @$_GET['search'];
 
 ?>
-	<!-- Sitters who are looking to sit pets -->
-	<div class="container-fluid text-center">
-		<h1>Sitters Looking for Work</h1>
+	<div class="container-fluid text-right">
 		<form id="filter-form" action="sitterlistings.php" method = "get" style="display: inline-flex">
 			<input type="search" name="search" id="q" placeholder="search"rows="1" style="width: 150px" value="<?=$filter?>"></input>
 			&nbsp; 
 			<button type="submit" option = "pet" class="submit-search-btn"><span class="glyphicon glyphicon-search"></span></button>
 		</form>
+	</div>
+
+	<!-- Sitters who are looking to sit pets -->
+	<div class="container-fluid text-center">
+		<h1>Sitters Looking for Work</h1>
 	</div>
 	
 <?php 

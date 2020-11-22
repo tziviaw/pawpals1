@@ -52,9 +52,9 @@ if(isset($_SESSION["username"])){
 	});
 
 	function checkUserSession() {
-		if (<?php echo !empty($_SESSION['username']) ?>) {
+		if (<?php echo isset($_SESSION['username']) ? 1 : 0 ?>) {
 			$('#registerlogin-button').hide();
-			if (!<?php echo $haspets ?>) {
+			if (<?php echo $haspets ? 1 : 0 ?>) {
 				$('my-pet-menu').hide();
 			}
 			if (<?php echo !empty($mysp) ? 1 : 0 ?>) {

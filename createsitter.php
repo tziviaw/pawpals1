@@ -21,6 +21,7 @@ if ($username) {
 		$availablefrom = @$_POST['availablefrom'];
 		$availableto = @$_POST['availableto'];
 		$description = @$_POST['description'];
+		$description = mysqli_real_escape_string($con, $description);
 		$sun = @$_POST['sunday'];
 		$mon = @$_POST['monday'];
 		$tues = @$_POST['tuesday'];

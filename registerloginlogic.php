@@ -65,15 +65,16 @@ if(isset($_POST['btn-register'])){
 	$password = trim($_POST['password']);
 		$password = md5($password);
 
-	// $zipcode = $_POST['zipcode'];
+	$zipcode = $_POST['zipcode'];
 
-	// $contact = $_POST['contact'];
-	// $profile = $_POST['choice-profile'];
+	$contact = $_POST['contact'];
+	$profile = $_POST['choice-profile'];
 
 
 	if ($fnameErr == "" && $lnameErr == "" && $emailErr == "" && $usernameErr == "" && $passwordErr == "" ) {
 		
 		$sql = "insert into users(fname, lname, email, username, password, zipcode, contact) 	values ('$fname', '$lname', '$email', '$username', '$password', '$zipcode', '$contact')";
+		
 		if($con->query($sql) === true) {
 				$_SESSION['username'] = $username;
 				header("Location: createsitter.php");

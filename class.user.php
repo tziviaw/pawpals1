@@ -41,8 +41,10 @@ class user
 
 	static function getSitterDetails($username, $con)
 	{
-		$sql = "select * from sitterprofiles where sp_username ='$username'";
-
+		$timeformat = '%r';
+		$sql = "select sp_id, sp_username, sp_description, sp_datecreated, TIME_FORMAT(sp_availablefrom, '$timeformat') as sp_availablefrom, TIME_FORMAT(sp_availableto, '$timeformat') as sp_availableto, sp_sun, sp_mon, sp_tues, sp_wed, sp_thurs, sp_fri, sp_sat from sitterprofiles where sp_username ='$username'";
+		// echo $sql;
+		// exit;
 		$result = $con->query($sql) or die($con->error);
 		$row = $result->fetch_assoc();
 
@@ -71,7 +73,8 @@ class user
 
 	static function getSitterProfile($sp_id, $con)
 	{
-		$sql = "select * from sitterprofiles join users on sp_username = username where sp_id ='$sp_id'";
+		$timeformat = '%I:%i %p';
+		$sql = "select username, email, fname, lname, contact, img, zipcode, sp_id, sp_username, sp_description, sp_datecreated, TIME_FORMAT(sp_availablefrom, '$timeformat') as sp_availablefrom, TIME_FORMAT(sp_availableto, '$timeformat') as sp_availableto, sp_sun, sp_mon, sp_tues, sp_wed, sp_thurs, sp_fri, sp_sat from sitterprofiles join users on sp_username = username where sp_id ='$sp_id'";
 
 		$result = $con->query($sql) or die($con->error);
 		$row = $result->fetch_assoc();

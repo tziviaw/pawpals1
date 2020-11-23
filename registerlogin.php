@@ -54,11 +54,18 @@ include "header.php";
 							<label for="exampleInputEmail1">Password</label>  <input type="password" name="password" class="form-control" value = "<?php echo $password; ?>" id="password" placeholder="Password" aria-describedby="emailHelp" style="text-decoration: none">
 						</div>
 						<div class="form-group">
-							<label for="exampleFormControlFile1">Profile Type</label><br> <input type="radio" name="choice-profile" id="choice-profile-sitter" value="sitter"> <label for="choice-profile-sitter">Sitter</label> <input type="radio" name="choice-profile" id="choice-profile-pet" value="pet"> <label for="choice-profile-pet">Pet</label> <input type="radio" name="choice-profile" id="choice-profile-both" value="both"> <label for="choice-profile-pet">Both</label>
+							<label for="exampleFormControlFile1">Profile Type</label><br> 
+							<input type="radio" name="profiletype" id="choice-profile-sitter" value="sitter"> <label for="choice-profile-sitter">Sitter</label> 
+
+							<input type="radio" name="profiletype" id="choice-profile-pet" value="pet"> 
+							<label for="choice-profile-pet">Pet</label> 
+
+							<input type="radio" name="profiletype" id="choice-profile-both" value="both"> 
+							<label for="choice-profile-pet">Both</label>
 							<!-- <div class="reveal-if-active"> -->
-								<div class="form-group">
+						<!--		<div class="form-group">
 									<label for="exampleFormControlFile1">Upload picture</label> <input type="file" name = "profileimage" class="form-control-file" id="exampleFormControlFile1">
-								</div>
+								</div>-->
 								<div class="form-group">
 									<label>Zipcode</label> <input type="text" name="zipcode" class="form-control" placeholder="12345">
 								</div>

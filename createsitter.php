@@ -4,6 +4,7 @@ include "header.php";
 <?php
 $errMsg = "";
 
+$imgupload = "";
 $availablefrom = "";
 $availableto = "";
 $description = "";
@@ -18,6 +19,8 @@ $sat = "";
 if ($username) {
 
 	if (isset($_POST['btn-createsitter'])){
+
+		$imgupload = @$_POST['imgupload'];
 		$availablefrom = @$_POST['availablefrom'];
 		$availableto = @$_POST['availableto'];
 		$description = @$_POST['description'];
@@ -34,8 +37,8 @@ if ($username) {
 			$errMsg = "Please enter all fields";
 		}
 		else{
-			$sql = "insert into sitterprofiles (sp_username, sp_description, sp_availablefrom, sp_availableto, sp_sun, sp_mon, sp_tues, sp_wed, sp_thurs, sp_fri, sp_sat)
-			values('$username', '$description', '$availablefrom', '$availableto', " 
+			$sql = "insert into sitterprofiles (sp_username, sp_img, sp_description, sp_availablefrom, sp_availableto, sp_sun, sp_mon, sp_tues, sp_wed, sp_thurs, sp_fri, sp_sat)
+			values('$username', '$imgupload', '$description', '$availablefrom', '$availableto', " 
 			. ($sun ? 1 : 0) . ", " 
 			. ($mon ? 1 : 0) . ", "
 			. ($tues ? 1 : 0) . ", "
@@ -64,6 +67,11 @@ if ($username) {
 		<form method="post" action="createsitter.php">
 			<div class="error"><?php echo $errMsg?></div>			
 			<div class="myform form">	
+			<div class="col-md-12 form-group">
+			 	<div class="error" style="color: red;"> <?php echo $errMsg;?></div>
+				<label for="exampleFormControlFile1">Upload picture</label>
+				<input type="file" class="form-control-file" id="" name="imgupload" value="<?php echo $imgupload ?>">
+			</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Availability</label><br>
 							<input type="checkbox" id="monday" name="monday" value="1" <?=$mon == "1" ? "checked" : ""?>> <label for="monday">Monday</label><br>

@@ -4,6 +4,7 @@
 	$sp_id = $_GET['sitter'];
 
 	$sitter_details = $user->getSitterProfile($sp_id, $con);
+	$image_show = $sitter_details['sp_img'];
 	$sitter_availsun = $sitter_details['sp_sun'];
 	$sitter_availmon = $sitter_details['sp_mon'];
 	$sitter_availtue = $sitter_details['sp_tues'];
@@ -12,7 +13,7 @@
 	$sitter_availfri = $sitter_details['sp_fri'];
 	$sitter_availsat = $sitter_details['sp_sat'];
 
-	$image_show = $sitter_details['img'];
+
 ?>
 
 
@@ -22,15 +23,14 @@
 			<!--blank header tag to provide top spacing equal to about-information-->
 			<h1></h1>
 			<div class="profile-img text-center">
-				<?php
+			<?php
 					if($image_show==''){
-						echo '<img src="images/profile-pic.jpg" class="img-profile" alt="<?php echo $username ?>" id="profileImage" style="width: 250px; height: 250px;"/>';
-
+							echo '<img src="images/profile-pic.jpg"  alt="<?php echo $username ?>" style="width: 250px; height: 250px;"/>';
 						}
 						else{
-					echo '<img src="data:image;base64,'.base64_encode($image_show).'" alt="<?php echo $username ?>" id="profileImage" />';
+					echo '<img src="data:image;base64,'.base64_encode($image_show).'" alt="<?php echo $username ?>"/>';
 					}
-				?>
+					?>
 			</div>
 		
 				<!--users.img-->

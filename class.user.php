@@ -71,10 +71,11 @@ class user
 		return $row;
 	}
 
+
 	static function getSitterProfile($sp_id, $con)
 	{
 		$timeformat = '%I:%i %p';
-		$sql = "select username, email, fname, lname, contact, img, zipcode, sp_id, sp_username, sp_description, sp_datecreated, TIME_FORMAT(sp_availablefrom, '$timeformat') as sp_availablefrom, TIME_FORMAT(sp_availableto, '$timeformat') as sp_availableto, sp_sun, sp_mon, sp_tues, sp_wed, sp_thurs, sp_fri, sp_sat from sitterprofiles join users on sp_username = username where sp_id ='$sp_id'";
+		$sql = "select username, email, fname, lname, contact, zipcode, sp_id, sp_username, sp_img, sp_description, sp_datecreated, TIME_FORMAT(sp_availablefrom, '$timeformat') as sp_availablefrom, TIME_FORMAT(sp_availableto, '$timeformat') as sp_availableto, sp_sun, sp_mon, sp_tues, sp_wed, sp_thurs, sp_fri, sp_sat from sitterprofiles join users on sp_username = username where sp_id ='$sp_id'";
 
 		$result = $con->query($sql) or die($con->error);
 		$row = $result->fetch_assoc();

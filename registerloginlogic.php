@@ -68,16 +68,22 @@ if(isset($_POST['btn-register'])){
 	$zipcode = $_POST['zipcode'];
 
 	$contact = $_POST['contact'];
-	$profile = $_POST['choice-profile'];
+	$profiletype = $_POST['profiletype'];
+
+	
 
 
 	if ($fnameErr == "" && $lnameErr == "" && $emailErr == "" && $usernameErr == "" && $passwordErr == "" ) {
 		
-		$sql = "insert into users(fname, lname, email, username, password, zipcode, contact) 	values ('$fname', '$lname', '$email', '$username', '$password', '$zipcode', '$contact')";
+		$sql = "insert into users(fname, lname, email, username, password, zipcode, contact, profiletype) 	
+		values ('$fname', '$lname', '$email', '$username', '$password', '$zipcode', '$contact', '$profiletype')";
 		
 		if($con->query($sql) === true) {
 				$_SESSION['username'] = $username;
-				header("Location: createsitter.php");
+				if ($profiletype == 'pet') {
+					header("Location: createprofile.php");
+				}else
+				header("Location: createsitter.php");}
 			// $finalstatus = "New user registered succesfully";
 			// $fname=$lname=$email=$username=$password = "";
 		}
@@ -86,5 +92,5 @@ if(isset($_POST['btn-register'])){
 		}
 	}
 
-}
+
 ?>

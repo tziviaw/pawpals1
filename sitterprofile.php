@@ -4,6 +4,13 @@
 	$sp_id = $_GET['sitter'];
 
 	$sitter_details = $user->getSitterProfile($sp_id, $con);
+	$sitter_availsun = $sitter_details['sp_sun'];
+	$sitter_availmon = $sitter_details['sp_mon'];
+	$sitter_availtue = $sitter_details['sp_tues'];
+	$sitter_availwed = $sitter_details['sp_wed'];
+	$sitter_availthurs = $sitter_details['sp_thurs'];
+	$sitter_availfri = $sitter_details['sp_fri'];
+	$sitter_availsat = $sitter_details['sp_sat'];
 
 	$image_show = $sitter_details['img'];
 ?>
@@ -31,7 +38,7 @@
 					<table>
 						<tr>
 							<td class="text-left">Name:</td>
-							<td><?php echo $sitter_details['fname'] ?> </td>
+							<td><?php echo $sitter_details['fname']." ".$sitter_details['lname'] ?> </td>
 							<!--concat(users.fname, " ", users.lname)-->
 						</tr>
 						<tr>
@@ -59,7 +66,7 @@
 						</tr>
 						<tr>
 							<td class="text-left">Days:</td>
-							<td>Sun, Mon, Tue, Wed, Thu, Fri, Sat</td>
+							<td><?php user::getAvailability($sitter_availsun, $sitter_availmon, $sitter_availtue, $sitter_availwed, $sitter_availthurs, $sitter_availfri, $sitter_availsat, $con)?></td>
 							<!--unknownFunc(sitterprofiles.sp_days)-->
 						</tr>
 					</table>

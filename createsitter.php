@@ -99,7 +99,7 @@ if ($username) {
 
 				
 				<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
-
+</article>
 <?php
 }
 else{

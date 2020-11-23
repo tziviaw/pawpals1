@@ -28,7 +28,7 @@
 
 						}
 						else{
-					echo '<img src="data:image;base64,'.base64_encode($image_show).'" alt="<?php echo $username ?>" id="profileImage" />';
+					echo '<img src="data:image;base64,'.$image_show.'" alt="<?php echo $username ?>" id="profileImage" />';
 					}
 				?>
 			</div>

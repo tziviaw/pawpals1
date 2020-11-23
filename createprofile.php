@@ -21,21 +21,40 @@ if ($username) {
 		$petsize = ucfirst(@$_POST['petsize']);
 		$description = @$_POST['description'];
 
+		// var_dump($_POST);
+		// var_dump($_FILES);
+		// var_dump($_FILES['imgupload']['tmp_name']);
+		// var_dump(getimagesize($_FILES['imgupload']['tmp_name']));
+
+		// exit;
+
+		//if button with the name uploadfilesub has been clicked
+		if(getimagesize($_FILES['imgupload']['tmp_name']) !== false){
+			// $imgContent = addslashes(file_get_contents($_FILES['imgupload']['tmp_name']));
+			$image = $_FILES['imgupload']['tmp_name'];
+			$imgContent = base64_encode(file_get_contents(addslashes($image)));
+
+		} 
+		// echo $imgContent;
+		// exit;
+
 		if ($description==""||$petbreed==""||$petname==""||$pettype==""||$petsize==""){
 			$errMsg = "Please enter all fields"; 
 			}
 		else{
 			$sql = "insert into petprofiles (pp_username, pp_description, pp_img, petname, pettype, breed, size)
-				values('$username', '$description', '$imgupload', '$petname', '$pettype', '$petbreed', '$petsize');";
+				values('$username', '$description', '$imgContent', '$petname', '$pettype', '$petbreed', '$petsize');";
 			// echo $sql;
 			// exit;
 			$result = $con->query($sql) or die($con->error);
 
-			$sqlid = "select pp_id from petprofiles where pp_username = '$username';";
-			$result = $con->query($sqlid);
-			$row = $result->fetch_assoc();
-			$id = $row['pp_id'];
-
+			$id = $con->insert_id;
+			
+			if($_SESSION['haspet']==0){
+			user::updateUserPet($username, $con);
+			}
+			// echo $id;
+			// exit;
 			header('Location: petprofile.php?pet='.$id);
 		}
 
@@ -47,13 +66,13 @@ if ($username) {
 		<div>
 			<h1>Create a Pet Profile</h1>
 		</div>
-     	<form method="post" action="createprofile.php">
+     	<form method="post" action="createprofile.php" enctype="multipart/form-data">
 	
 			<!--Upload pic-->
          	<div class="col-md-12 form-group">
 			 	<div class="error" style="color: red;"> <?php echo $errMsg;?></div>
 				<label for="exampleFormControlFile1">Upload picture</label>
-				<input type="file" class="form-control-file" id="" name="imgupload" value="<?php echo $imgupload ?>">
+				<input type="file" name="imgupload">
 			</div>
 
 		    <!--Field 1&2-->

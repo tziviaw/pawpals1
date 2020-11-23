@@ -59,7 +59,7 @@ $filter = @$_GET['search'];
 						echo '<a href="sitterprofile.php?sitter=' . $listing_id . '"><img src="images/profile-pic.jpg" alt="profile picture" class="img-rounded" height="120px"></a>';
 						} 
 						else{
-							echo '<a href="sitterprofile.php?sitter=' . $listing_id . '"><img src="data:image/jpeg;base64,'.base64_encode($listing_img).'" class="listingimage" 
+							echo '<a href="sitterprofile.php?sitter=' . $listing_id . '"><img src="data:image/jpeg;base64,'.$listing_img.'" class="listingimage" 
 							alt="profile picture height="120px" style="width: 120px; height: 120px;" /></a>';
 						}
 						?>

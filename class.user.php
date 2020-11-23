@@ -81,6 +81,14 @@ class user
 
 		return $row;
 	}
+
+	static function updateUserPet($user, $con){
+		$sql = "UPDATE users
+				SET hasPet = 1
+				WHERE username = '$user';";
+		$result = $con->query($sql) or die($con->error);
+		
+	}
 	//$sql = "select * from users where username='$username'";
 	//$sql = "select * from sitterprofiles where sp_username ='$username'";
 }

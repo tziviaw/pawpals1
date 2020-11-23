@@ -26,6 +26,8 @@ if(isset($_POST['btn-login'])){
 			$username = $row['username'];
 			
 			$_SESSION['username'] = $username;
+			$_SESSION['haspet'] = $row['hasPet'];
+			$_SESSION['hassitter'] = $row['hasSitter'];
 			header("Location: index.php");
 			exit;
 		}
@@ -43,7 +45,8 @@ $fnameErr = $lnameErr = $emailErr = $usernameErr = $passwordErr = "";
 $finalstatus = "";
 
 if(isset($_POST['btn-register'])){
-
+	// echo var_dump($_POST);
+	// exit;
 	$fname = ucfirst(trim($_POST['fname']));
 
 	$lname =  ucfirst(trim($_POST['lname']));
@@ -70,17 +73,55 @@ if(isset($_POST['btn-register'])){
 	$contact = $_POST['contact'];
 	$profile = $_POST['choice-profile'];
 
+	// echo $profile;
+	// exit;
+
+	if(getimagesize($_FILES['profileimage']['tmp_name']) !== false){
+		// $imgContent = addslashes(file_get_contents($_FILES['imgupload']['tmp_name']));
+		$image = $_FILES['profileimage']['tmp_name'];
+		$imgContent = base64_encode(file_get_contents(addslashes($image)));
+
+	} 
+
 
 	if ($fnameErr == "" && $lnameErr == "" && $emailErr == "" && $usernameErr == "" && $passwordErr == "" ) {
+		if($profile == "sitter"){
+			$hassitter = 1;
+			$haspet = 0;
+		}elseif($profile == "pet"){
+			$haspet = 1;
+			$hassitter = 0;
+		}elseif($profile == "both"){
+			$haspet = 1;
+			$hassitter = 1;
+		}
+
+		$sql = "insert into users(fname, lname, email, username, password, zipcode, contact, img, hasSitter, hasPet) 	values ('$fname', '$lname', '$email', '$username', '$password', '$zipcode', '$contact', '$imgContent', '$hassitter', '$haspet')";
+		$success = $con->query($sql) or die($con->error);
+		// echo $sql;
+		// echo $success;
+		// exit;
 		
-		$sql = "insert into users(fname, lname, email, username, password, zipcode, contact) 	values ('$fname', '$lname', '$email', '$username', '$password', '$zipcode', '$contact')";
-		
-		if($con->query($sql) === true) {
+		if($success === true && $profile == "both") {
 				$_SESSION['username'] = $username;
+				$_SESSION['haspet'] = 1;
+				$_SESSION['hassitter'] = 1;
 				header("Location: createsitter.php");
 			// $finalstatus = "New user registered succesfully";
 			// $fname=$lname=$email=$username=$password = "";
 		}
+		elseif($success === true && $profile == "sitter"){
+			$_SESSION['username'] = $username;
+			$_SESSION['haspet'] = 0;
+			$_SESSION['hassitter'] = 1;
+			header("Location: createsitter.php");
+		} elseif($success === true && $profile == "pet"){
+			$_SESSION['username'] = $username;
+			$_SESSION['haspet'] = 1;
+			$_SESSION['hassitter'] = 0;
+			header("Location: createprofile.php");
+		}
+		
 		else{
 			$finalstatus = $con->error;
 		}

@@ -20,11 +20,15 @@ $filter = @$_GET['search'];
 
 	<?php if ($username == ''){
 		echo '<div class="container-fluid text-center"><a href="registerlogin.php"> Sign In or Register to create a new listing </a></div>';
+	} else{
+		if($_SESSION['haspet'] == 0){
+		echo '<div class="container-fluid text-center"><a href = "createprofile.php"> Create a pet profile to create a new listing </a></div>';
 	} else{?>
 	<!-- Holds button for form to create new listing-->
 	<div class="container-fluid text-center createlisting">
 	<button class="open-button" id="show-button" onclick="openForm(); getElementById('form-popup').style.display = 'block'; this.style.display = 'none'">Create New Listing</button>
 	</div>
+		<?php }?>
 	
 	<div class="form-popup container-fluid" id="listingForm">
 	<!-- Listings form -->
@@ -110,8 +114,8 @@ $filter = @$_GET['search'];
 							echo '<a href="petprofile.php?pet=' . $listings_petid . '"><img src="images/profile-pic.jpg" alt="profile picture" class="img-rounded" height="120px"/></a>';
 						}
 						else{
-							echo'<a href="petprofile.php?pet=' . $listings_petid . '"><img src="data:image/jpeg;base64,'.base64_encode($listing_img).'" class="listingimage" 
-							alt="profile picture height="120px" style="width: 120px; height: 120px;" /></a>';
+							echo'<a href="petprofile.php?pet=' . $listings_petid . '"><img src="data:image/jpeg;base64,'.$listing_img.'" class="listingimage" 
+							alt="profile picture" height="120px" style="width: 120px; height: 120px;" /></a>';
 						}
 						?>
 						</br>

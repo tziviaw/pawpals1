@@ -13,6 +13,8 @@ $mysp = [];
 if(isset($_SESSION["username"])){
 	
 	$username = $_SESSION["username"];
+	$haspet = $_SESSION['haspet'];
+	$hassitter = $_SESSION['hassitter'];
 	
 	$pets = user::getPets($username, $con);
 	$mysp = user::getSitterDetails($username, $con);
@@ -57,7 +59,7 @@ if(isset($_SESSION["username"])){
 			if (<?php echo $haspets ? 1 : 0 ?>) {
 				$('my-pet-menu').hide();
 			}
-			if (<?php echo !empty($mysp) ? 1 : 0 ?>) {
+			if (<?php echo !empty($mysp) ? 0 : 1 ?>) {
 				$('#my-sitter-profile').hide();
 			}
 		} else {

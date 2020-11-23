@@ -20,7 +20,7 @@
 							echo '<img src="images/profile-pic.jpg"  alt="<?php echo $username ?>" style="width: 250px; height: 250px;"/>';
 						}
 						else{
-					echo '<img src="data:image;base64,'.base64_encode($image_show).'" alt="<?php echo $username ?>"/>';
+					echo '<img src="data:image;base64,'.$image_show.'" alt="<?php echo $username ?>"/>';
 					}
 					?>
 				</div>

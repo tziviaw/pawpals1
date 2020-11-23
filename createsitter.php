@@ -53,7 +53,12 @@ if ($username) {
 			$row = $result->fetch_assoc();
 			$id = $row['sp_id'];
 
+			if($_SESSION['haspet']==1){
+				header('Location: createprofile.php');
+			}else{
+
 			header('Location: sitterprofile.php?sitter='.$id);
+			}
 		}
 
 	}

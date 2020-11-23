@@ -31,7 +31,7 @@ $filter = @$_GET['search'];
 	} 
 		// $listings = $listingob->getListings($con);
 		foreach($listings as $row){
-			$listing_img = $row['img'];
+			$listing_img = $row['sp_img'];
 			$listing_username = $row['username'];
 			$listing_name = $row['fullname'];
 			$listing_description = $row['sp_description'];

@@ -14,7 +14,7 @@ class sitterlisting{
 
 
         $sql = "select sp_id, username, CONCAT(fname, ' ', lname) as 'fullname', sp_description, 
-        sp_availablefrom, sp_availableto, sp_sun, sp_mon, sp_tues, sp_wed, sp_thurs, sp_fri, sp_sat, contact, zipcode, img
+        sp_availablefrom, sp_availableto, sp_sun, sp_mon, sp_tues, sp_wed, sp_thurs, sp_fri, sp_sat, contact, zipcode, sp_img
         from users, sitterprofiles
         where username = sp_username
         and (username like '%$filter%' or 'fullname' like '%$filter%' or sp_description like '%$filter%'

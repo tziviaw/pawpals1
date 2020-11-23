@@ -13,8 +13,14 @@ $petsize = "";
 if ($username) {
 
 	if (isset($_POST['btn-createpetprofile'])){
+		
+		if(getimagesize($_FILES['imgupload']['tmp_name']) !== false){
+			$imgupload = addslashes(file_get_contents($_FILES['imgupload']['tmp_name']));
+		}
+		else
+		$imgErr = "upload an image";
 
-		$imgupload = @$_POST['imgupload'];
+		//$imgupload = @$_POST['imgupload'];
 		$petname = ucfirst(@$_POST['petname']);
 		$pettype = ucfirst(@$_POST['pettype']);
 		$petbreed = ucfirst(@$_POST['petbreed']);
@@ -47,13 +53,13 @@ if ($username) {
 		<div>
 			<h1>Create a Pet Profile</h1>
 		</div>
-     	<form method="post" action="createprofile.php">
+     	<form method="post" action="createprofile.php" enctype="multipart/form-data">
 	
 			<!--Upload pic-->
          	<div class="col-md-12 form-group">
 			 	<div class="error" style="color: red;"> <?php echo $errMsg;?></div>
 				<label for="exampleFormControlFile1">Upload picture</label>
-				<input type="file" class="form-control-file" id="" name="imgupload" value="<?php echo $imgupload ?>">
+				<input type="file" class="form-control-file" id="imgupload" name="imgupload" >
 			</div>
 
 		    <!--Field 1&2-->

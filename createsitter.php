@@ -20,7 +20,13 @@ if ($username) {
 
 	if (isset($_POST['btn-createsitter'])){
 
-		$imgupload = @$_POST['imgupload'];
+		if(getimagesize($_FILES['imgupload']['tmp_name']) !== false){
+			$imgupload = addslashes(file_get_contents($_FILES['imgupload']['tmp_name']));
+		}
+		else
+		$imgErr = "upload an image";
+
+		//	$imgupload = @$_POST['imgupload'];
 		$availablefrom = @$_POST['availablefrom'];
 		$availableto = @$_POST['availableto'];
 		$description = @$_POST['description'];
@@ -64,13 +70,13 @@ if ($username) {
 ?>
 	<p class = "text-center"> Fill in the following fields to finish creating your sitter profile </p>
 			
-		<form method="post" action="createsitter.php">
+		<form method="post" action="createsitter.php" enctype="multipart/form-data">
 			<div class="error"><?php echo $errMsg?></div>			
 			<div class="myform form">	
 			<div class="col-md-12 form-group">
-			 	<div class="error" style="color: red;"> <?php echo $errMsg;?></div>
+				<div class="error" style="color: red;"> <?php echo $errMsg;?></div>
 				<label for="exampleFormControlFile1">Upload picture</label>
-				<input type="file" class="form-control-file" id="" name="imgupload" value="<?php echo $imgupload ?>">
+				<input type="file" class="form-control-file" id="imgupload" name="imgupload" >
 			</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Availability</label><br>

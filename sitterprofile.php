@@ -72,7 +72,8 @@ $sitter_availsat = $sitter_details['sp_sat'];
 		<?php if (!isset($_SESSION['username'])) {
 			echo '<div class = "container-fluid text-center"><td><a href="registerlogin.php"> Sign in or Register to leave a review </a></div>';
 		} else {
-			echo '<div class="container-fluid text-center"><a href="createreview.php?sitter=' . $sp_id . '"> Leave a Review </a></div>';
+			echo '<div class="container-fluid text-center"><a href="createreview.php?sitter=' . $sp_id . '" style="color:blue; font-weight: bold; font-size: 140%;"> Review this Sitter </a></div>';
+			
 		}
 		?>
 	</div>

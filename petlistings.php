@@ -5,6 +5,7 @@ include "class.petlisting.php";
 $listingob = new petlisting;
 $filter = @$_GET['search'];
 
+
 ?>
 
 	<div class="container-fluid text-right">
@@ -21,7 +22,7 @@ $filter = @$_GET['search'];
 		echo '<div class="container-fluid text-center"><a href="registerlogin.php"> Sign In or Register to create a new listing </a></div>';
 	} else{
 		if($_SESSION['profile'] == 'sitter'){
-			echo '<div class="container-fluid text-center"><a href="creatprofile.php"> Create a Pet Profile to create a new listing </a></div>';
+			echo '<div class="container-fluid text-center"><a href="createprofile.php"> Create a Pet Profile to create a new listing </a></div>';
 		}
 		else{?>
 

@@ -102,6 +102,14 @@ class user
 		}
 		return $rows;
 	}
+
+	static function updateProfileStatus($username, $con){
+		$sql = "update users 
+				set profiletype = 'both'
+				where username = '$username'";
+
+		$result = $con->query($sql);
+	}
 	//$sql = "select * from users where username='$username'";
 	//$sql = "select * from sitterprofiles where sp_username ='$username'";
 }

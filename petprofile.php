@@ -51,7 +51,7 @@
 						</tr>
 						<tr>
 							<td class="text-left">Breed:</td>
-							<td><?php echo $pet_details['petname'] ?></td>
+							<td><?php echo $pet_details['breed'] ?></td>
 							<!--petprofiles.breed-->
 						</tr>
 						<tr>

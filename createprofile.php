@@ -28,6 +28,7 @@ if ($username) {
 		$petbreed = ucfirst(@$_POST['petbreed']);
 		$petsize = ucfirst(@$_POST['petsize']);
 		$description = @$_POST['description'];
+		$description = mysqli_real_escape_string($con,$description);
 
 		if ($description==""||$petbreed==""||$petname==""||$pettype==""||$petsize==""){
 			$errMsg = "Please enter all fields"; 
@@ -41,8 +42,9 @@ if ($username) {
 
 			$id = $con->insert_id;
 
-			if($_SESSION['profile'] == "sitter"){
+			if($_SESSION['profile'] == 'sitter'){
 				$_SESSION['profile'] = 'both';
+				user::updateProfileStatus($username, $con);
 			}
 
 			header('Location: petprofile.php?pet='.$id);

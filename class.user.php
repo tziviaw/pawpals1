@@ -91,6 +91,25 @@ class user
 
 		return $row;
 	}
+
+	static function getReviews($sitter, $con){
+		$sql = "select * from sitterreviews where sr_sitterid = '$sitter'";
+
+		$result = $con->query($sql) or die($con->error);
+		$rows = [];
+		while($row = $result->fetch_assoc()){
+			$rows[] = $row;
+		}
+		return $rows;
+	}
+
+	static function updateProfileStatus($username, $con){
+		$sql = "update users 
+				set profiletype = 'both'
+				where username = '$username'";
+
+		$result = $con->query($sql);
+	}
 	//$sql = "select * from users where username='$username'";
 	//$sql = "select * from sitterprofiles where sp_username ='$username'";
 }

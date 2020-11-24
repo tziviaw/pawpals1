@@ -9,6 +9,7 @@ print_r($_POST);
 $username = $_SESSION['username'];
 $pp_id = $_POST['pp_id'];
 $description = $_POST['description'];
+$description = mysqli_real_escape_string($con,$description);
 $neededfrom = $_POST['neededfrom'];
 $neededto = $_POST['neededto'];
 

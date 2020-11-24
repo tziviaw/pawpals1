@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)http://localhost/pawpals/pawpals1/sitterprofile.php?sitter=1 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width">
+<title>Pawpals</title>
+<link rel="stylesheet" type="text/css" href="./Pawpals_files/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="./Pawpals_files/style.css">
+<script src="./Pawpals_files/jquery.min.js"></script>
+<script src="./Pawpals_files/jquery.validate.min.js"></script>
+
+<script type="text/javascript">
+	//keeps user-related-buttons or registerlogin-button from flickering on-screen before the user session is checked.
+	//without these functions, however, flickering is only visible in desktop view.
+	document.write('<style type="text/css">body{display:none}</style>');
+	jQuery(function($) {
+		$('body').css('display','block');
+		checkUserSession();
+
+	//hides or shows a combination of user-related-buttons, registerlogin-button, my-pet-menu, and my-sitter-profile
+	//based on the values of $_SESSION['username'], $haspets, and $has_sp_id
+	});
+
+	function checkUserSession() {
+		if (0) {
+			$('#registerlogin-button').hide();
+			if (0) {
+				$('my-pet-menu').hide();
+			}
+			if (1) {
+				$('#my-sitter-profile').hide();
+			}
+		} else {
+			$('.user-related-buttons').hide();
+		}
+
+	}
+
+</script><style type="text/css">body{display:none}</style>
+
+</head>
+<body style="display: block;">
+	<article class="main-container">
+		<header>
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="http://localhost/pawpals/pawpals1/index.php">PawPals </a>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav button">
+							<li><a href="http://localhost/pawpals/pawpals1/sitterlistings.php" role="button">Sitters</a></li>
+							<li><a href="http://localhost/pawpals/pawpals1/petlistings.php" role="button">Pets</a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								</li><li>
+									<a id="registerlogin-button" href="http://localhost/pawpals/pawpals1/registerlogin.php" role="button">
+										<span id="register-login-ico" class="glyphicon glyphicon-log-in"></span>Register/Login
+									</a>
+								</li>
+								<div class="dropdown user-related-buttons" style="display: none;">
+									<a id="my-profile-brand" href="http://localhost/pawpals/pawpals1/sitterprofile.php?sitter=1#" class="dropdown-toggle navbar-brand" data-toggle="dropdown">My Profile</a>
+									<div id="my-profile" class="dropdown-menu">
+										<ul>
+											<li id="my-sitter-profile"><a href="http://localhost/pawpals/pawpals1/sitterprofile.php?sitter=%3Cbr%20/%3E%3Cb%3ENotice%3C/b%3E:%20%20Undefined%20index:%20sp_id%20in%20%3Cb%3E/Applications/XAMPP/xamppfiles/htdocs/pawpals/pawpals1/header.php%3C/b%3E%20on%20line%20%3Cb%3E107%3C/b%3E%3Cbr%20/%3E" role="button">View Sitter Profile</a></li>
+											<!-- displays links to pet profiles based on store values -->
+											<div id="my-pet-menu">
+												<li id="my-pet-menu-header"><label>My Pets</label></li>
+												<br>
+<b>Notice</b>:  Undefined variable: pets in <b>/Applications/XAMPP/xamppfiles/htdocs/pawpals/pawpals1/header.php</b> on line <b>112</b><br>
+<br>
+<b>Warning</b>:  Invalid argument supplied for foreach() in <b>/Applications/XAMPP/xamppfiles/htdocs/pawpals/pawpals1/header.php</b> on line <b>112</b><br>
+											</div>
+											<li><a href="http://localhost/pawpals/pawpals1/createprofile.php" role="button">Create a Pet Profile</a></li>
+											<li><a href="http://localhost/pawpals/pawpals1/logout.php" role="button">
+												<span id="register-login-ico" class="glyphicon glyphicon-log-out"></span>Logout
+											</a></li>
+										</ul>
+									</div>
+								</div>
+							
+						</ul>
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
+			</nav>
+		</header>
+
+
+<div class="container">
+	<article class="row">
+		<section class="col-sm-5">
+			<!--blank header tag to provide top spacing equal to about-information-->
+			<h1></h1>
+			<div class="profile-img text-center">
+				<img src="data:image;base64,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" alt="&lt;?php echo $username ?&gt;">			</div>
+
+			<!--users.img-->
+			<div class="profile-info">
+				<table>
+					<tbody><tr>
+						<td class="text-left">Name:</td>
+						<td>Rachel Green </td>
+						<!--concat(users.fname, " ", users.lname)-->
+					</tr>
+					<tr>
+						<td class="text-left">Location:</td>
+						<td>12345 </td>
+						<!--users.location-->
+					</tr>
+					<tr>
+						<td class="text-left">Contact:</td>
+						<td>1234567890 </td>
+						<!--users.contact-->
+					</tr>
+					<tr>
+						<td class="text-left">Availabile:</td>
+						<td></td>
+					</tr><tr>
+						<td class="text-left">From:</td>
+						<td>07:25 PM</td>
+						<!--sitterprofiles.sp_availablefrom-->
+					</tr>
+					<tr>
+						<td class="text-left">To:</td>
+						<td>07:25 PM</td>
+						<!--sitterprofiles.sp_availableto-->
+					</tr>
+					<tr>
+						<td class="text-left">Days:</td>
+						<td>Monday, Tuesday, Wednesday, Thursday</td>
+						<!--unknownFunc(sitterprofiles.sp_days)-->
+					</tr>
+				</tbody></table>
+			<br>
+				<div class="container-fluid text-center"><button action="registerlogin.php">Sign in or Register to leave a review</button></div>			</div>
+		</section>
+		<section class="col-sm-7">
+			<div class="about-information">
+				<h1>About Sitter</h1>
+				<p>test</p>
+				<!--sitterprofiles.sp_description-->
+			</div>
+		</section>
+	</article>
+</div>
+</article>
+			
+		<footer class="footer">
+			<div class="container-fluid text-center">
+				<p>PawPals</p>
+				<p>Copyright @ 2020</p>
+				<p> Email Us: <a href="mailto:email@mail.com" id="email">email@mail.com</a></p>
+			</div>
+		</footer>
+		<script src="./Pawpals_files/bootstrap.js"></script>
+	
+
+</body></html>

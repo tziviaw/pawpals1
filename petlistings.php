@@ -17,15 +17,20 @@ $filter = @$_GET['search'];
 	<div class="container-fluid text-center">
 		<h1>Pets That Need Sitting</h1>
 	</div>
-
 	<?php if ($username == ''){
 		echo '<div class="container-fluid text-center"><a href="registerlogin.php"> Sign In or Register to create a new listing </a></div>';
-	} else{?>
+	} else{
+		if($_SESSION['profile'] = 'sitter'){
+			echo '<div class="container-fluid text-center"><a href="creatprofile.php"> Create a Pet Profile to create a new listing </a></div>';
+		}
+		else{?>
+
+
 	<!-- Holds button for form to create new listing-->
 	<div class="container-fluid text-center createlisting">
 	<button class="open-button" id="show-button" onclick="openForm(); getElementById('form-popup').style.display = 'block'; this.style.display = 'none'">Create New Listing</button>
 	</div>
-	
+		<?php }?>
 	<div class="form-popup container-fluid" id="listingForm">
 	<!-- Listings form -->
 

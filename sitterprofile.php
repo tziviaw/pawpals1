@@ -12,6 +12,8 @@
 	$sitter_availthurs = $sitter_details['sp_thurs'];
 	$sitter_availfri = $sitter_details['sp_fri'];
 	$sitter_availsat = $sitter_details['sp_sat'];
+
+	// echo $_SESSION['profile'];
 ?>
 
 

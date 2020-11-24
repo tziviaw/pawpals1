@@ -20,7 +20,7 @@ $filter = @$_GET['search'];
 	<?php if ($username == ''){
 		echo '<div class="container-fluid text-center"><a href="registerlogin.php"> Sign In or Register to create a new listing </a></div>';
 	} else{
-		if($_SESSION['profile'] = 'sitter'){
+		if($_SESSION['profile'] == 'sitter'){
 			echo '<div class="container-fluid text-center"><a href="creatprofile.php"> Create a Pet Profile to create a new listing </a></div>';
 		}
 		else{?>

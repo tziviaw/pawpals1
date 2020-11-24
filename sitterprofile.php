@@ -49,17 +49,17 @@ $sitter_availsat = $sitter_details['sp_sat'];
 				<td><?php echo $sitter_details['contact'] ?> </td>
 				<!--users.contact-->
 			</tr>
-				<td class="text-left">Available From:</td>
+				<td class="text-left">Avail From:</td>
 				<td><?php echo $sitter_details['sp_availablefrom'] ?></td>
 				<!--sitterprofiles.sp_availablefrom-->
 			</tr>
 			<tr>
-				<td class="text-left">Available To:</td>
+				<td class="text-left">Avail To:</td>
 				<td><?php echo $sitter_details['sp_availableto'] ?></td>
 				<!--sitterprofiles.sp_availableto-->
 			</tr>
 			<tr>
-				<td class="text-left">Available Days:</td>
+				<td class="text-left">Days:</td>
 				<td><?php user::getAvailability($sitter_availsun, $sitter_availmon, $sitter_availtue, $sitter_availwed, $sitter_availthurs, $sitter_availfri, $sitter_availsat, $con) ?></td>
 				<!--unknownFunc(sitterprofiles.sp_days)-->
 			</tr>

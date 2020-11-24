@@ -1,7 +1,6 @@
 <?php
 include "header.php";
-?>
-<?php
+
 $errMsg = "";
 
 $imgupload = "";
@@ -57,12 +56,13 @@ if ($username) {
 			// exit;
 			$result = $con->query($sql) or die($con->error);
 
-			$sqlid = "select sp_id from sitterprofiles where sp_username = '$username';";
-			$result = $con->query($sqlid);
-			$row = $result->fetch_assoc();
-			$id = $row['sp_id'];
+			$id = $con->insert_id;
 
-			header('Location: sitterprofile.php?sitter='.$id);
+			if($_SESSION['profile'] == "both"){
+				header('Location: createprofile.php');
+			}else{
+				header('Location: sitterprofile.php?sitter='.$id);
+			}
 		}
 
 	}

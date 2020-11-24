@@ -26,6 +26,7 @@ if(isset($_POST['btn-login'])){
 			$username = $row['username'];
 			
 			$_SESSION['username'] = $username;
+
 			header("Location: index.php");
 			exit;
 		}
@@ -69,7 +70,6 @@ if(isset($_POST['btn-register'])){
 
 	$contact = $_POST['contact'];
 	$profiletype = $_POST['profiletype'];
-
 	
 
 
@@ -81,9 +81,15 @@ if(isset($_POST['btn-register'])){
 		if($con->query($sql) === true) {
 				$_SESSION['username'] = $username;
 				if ($profiletype == 'pet') {
+					$_SESSION['profile'] = 'pet';
 					header("Location: createprofile.php");
-				}else
-				header("Location: createsitter.php");}
+				}elseif($profiletype == 'sitter'){
+					$_SESSION['profile'] = 'sitter';
+					header("Location: createsitter.php");
+			}elseif($profiletype =='both'){
+					$_SESSION['profile'] == 'both';
+					header("Location: createsitter.php");
+			}
 			// $finalstatus = "New user registered succesfully";
 			// $fname=$lname=$email=$username=$password = "";
 		}
@@ -91,6 +97,5 @@ if(isset($_POST['btn-register'])){
 			$finalstatus = $con->error;
 		}
 	}
-
-
+}
 ?>

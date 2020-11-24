@@ -17,6 +17,9 @@ if(isset($_SESSION["username"])){
 	$pets = user::getPets($username, $con);
 	$mysp = user::getSitterDetails($username, $con);
 	
+	$profile = user::getProfileStatus($username, $con);
+	$_SESSION['profile'] = $profile['profiletype']; 
+	
 	//set the $haspets flag based on the contents of $pets for use in the dropdown menu
 	if(!empty($pets)){
 		$haspets = true;

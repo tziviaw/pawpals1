@@ -60,7 +60,7 @@ if(isset($_SESSION["username"])){
 			if (<?php echo $haspets ? 1 : 0 ?>) {
 				$('my-pet-menu').hide();
 			}
-			if (<?php echo !empty($mysp) ? 1 : 0 ?>) {
+			if (<?php echo empty($mysp) ? 1 : 0 ?>) {
 				$('#my-sitter-profile').hide();
 			}
 		} else {

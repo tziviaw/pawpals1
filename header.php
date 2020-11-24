@@ -17,6 +17,9 @@ if(isset($_SESSION["username"])){
 	$pets = user::getPets($username, $con);
 	$mysp = user::getSitterDetails($username, $con);
 	
+	$profile = user::getProfileStatus($username, $con);
+	$_SESSION['profile'] = $profile['profiletype']; 
+	
 	//set the $haspets flag based on the contents of $pets for use in the dropdown menu
 	if(!empty($pets)){
 		$haspets = true;
@@ -57,7 +60,7 @@ if(isset($_SESSION["username"])){
 			if (<?php echo $haspets ? 1 : 0 ?>) {
 				$('my-pet-menu').hide();
 			}
-			if (<?php echo !empty($mysp) ? 1 : 0 ?>) {
+			if (<?php echo empty($mysp) ? 1 : 0 ?>) {
 				$('#my-sitter-profile').hide();
 			}
 		} else {

@@ -82,6 +82,15 @@ class user
 
 		return $row;
 	}
+
+	static function getProfileStatus($username, $con){
+		$sql = "select profiletype from users where username = '$username'";
+
+		$result = $con->query($sql) or die($con->error);
+		$row = $result->fetch_assoc();
+
+		return $row;
+	}
 	//$sql = "select * from users where username='$username'";
 	//$sql = "select * from sitterprofiles where sp_username ='$username'";
 }

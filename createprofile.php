@@ -16,6 +16,8 @@ if ($username) {
 		
 		if(getimagesize($_FILES['imgupload']['tmp_name']) !== false){
 			$imgupload = addslashes(file_get_contents($_FILES['imgupload']['tmp_name']));
+			// echo $imgupload;
+			// exit;
 		}
 		else
 		$imgErr = "upload an image";
@@ -37,10 +39,11 @@ if ($username) {
 			// exit;
 			$result = $con->query($sql) or die($con->error);
 
-			$sqlid = "select pp_id from petprofiles where pp_username = '$username';";
-			$result = $con->query($sqlid);
-			$row = $result->fetch_assoc();
-			$id = $row['pp_id'];
+			$id = $con->insert_id;
+
+			if($_SESSION['profile'] == "sitter"){
+				$_SESSION['profile'] = 'both';
+			}
 
 			header('Location: petprofile.php?pet='.$id);
 		}
